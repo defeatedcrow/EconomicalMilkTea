@@ -1,0 +1,21 @@
+
+tile.defeatedcrow.emt.distributor.name=Distribution Board
+tile.defeatedcrow.emt.generator.name=Diesel Yuzu Generator
+tile.defeatedcrow.emt.en_tank.name=Yuzu Energy Tank
+tile.defeatedcrow.emt.en_motor.name=Yuzu Energy Motor
+tile.defeatedcrow.emt.kari_shop.name=Alpha Version Shop
+
+item.defeatedcrow.emt.en_ticket_8_4.name=Monthly Ticket(8CA/t x 4slot)
+item.defeatedcrow.emt.en_ticket_16_4.name=Monthly Ticket(16CA/t x 4slot)
+item.defeatedcrow.emt.en_ticket_4_8.name=Monthly Ticket(4CA/t x 8slot)
+item.defeatedcrow.emt.en_ticket_8_8.name=Monthly Ticket(8CA/t x 8slot)
+item.defeatedcrow.emt.en_ticket_16_8.name=Monthly Ticket(16CA/t x 8slot)
+item.defeatedcrow.emt.cood_ticket.name=Coordinate Registration Card
+item.defeatedcrow.emt.fuel_can_camellia.name=Camellia Oil Can
+item.defeatedcrow.emt.fuel_can_vegeoil.name=Vegetable Oil Can
+
+dcs.energy.distributor.gui=Distribution Board Gui
+dcs.energy.motorInv.gui=Yuzu Energy Motor Gui
+dcs.energy.tankInv.gui=Yuzu Energy Tank Gui
+dcs.energy.generatorInv.gui=Diesel Yuzu Generator Gui
+

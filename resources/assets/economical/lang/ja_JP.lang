@@ -1,0 +1,20 @@
+
+tile.defeatedcrow.emt.distributor.name=分電盤
+tile.defeatedcrow.emt.generator.name=ディーゼル柚子発電機
+tile.defeatedcrow.emt.en_tank.name=柚子エネルギータンク
+tile.defeatedcrow.emt.en_motor.name=柚子エネルギーモーター
+tile.defeatedcrow.emt.kari_shop.name=アルファ版ショップ
+
+item.defeatedcrow.emt.en_ticket_8_4.name=月額チケット(8CA/t x 4slot)
+item.defeatedcrow.emt.en_ticket_16_4.name=月額チケット(16CA/t x 4slot)
+item.defeatedcrow.emt.en_ticket_4_8.name=月額チケット(4CA/t x 8slot)
+item.defeatedcrow.emt.en_ticket_8_8.name=月額チケット(8CA/t x 8slot)
+item.defeatedcrow.emt.en_ticket_16_8.name=月額チケット(16CA/t x 8slot)
+item.defeatedcrow.emt.cood_ticket.name=マシン座標登録カード
+item.defeatedcrow.emt.fuel_can_camellia.name=椿油缶
+item.defeatedcrow.emt.fuel_can_vegeoil.name=植物油缶
+
+dcs.energy.distributor.gui=分電盤
+dcs.energy.motorInv.gui=柚子エネルギーモーター
+dcs.energy.tankInv.gui=柚子エネルギータンク
+dcs.energy.generatorInv.gui=ディーゼル柚子発電機
