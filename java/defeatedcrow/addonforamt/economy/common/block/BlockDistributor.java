@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.EMTLogger;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 import defeatedcrow.addonforamt.economy.util.ChunkLoaderController.IChunkBlock;
@@ -146,6 +146,11 @@ public class BlockDistributor extends BlockContainer implements IChunkBlock {
 	}
 
 	@Override
+	public Item getItemDropped(int metadata, Random rand, int fortune) {
+		return null;
+	}
+
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase live, ItemStack par6ItemStack) {
 		int l = MathHelper.floor_double(live.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		int meta = par6ItemStack.getItemDamage();
@@ -245,7 +250,7 @@ public class BlockDistributor extends BlockContainer implements IChunkBlock {
 
 	@Override
 	public boolean canLoad(World world, int x, int y, int z) {
-		EMTLogger.debugInfo("Could be loaded!");
+		// EMTLogger.debugInfo("Could be loaded!");
 		return true;
 	}
 

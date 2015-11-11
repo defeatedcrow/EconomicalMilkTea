@@ -30,4 +30,6 @@ public interface IOrder {
 
 	public boolean matches(ItemStack items);
 
+	String getName();
+
 }

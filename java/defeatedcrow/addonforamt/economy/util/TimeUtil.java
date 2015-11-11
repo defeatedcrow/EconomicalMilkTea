@@ -32,23 +32,29 @@ public class TimeUtil {
 	 * SextiarySector2の季節と互換性を持たせるよう、同じ内容のメソッドを作成
 	 */
 	public static int getSeason(World world) {
-		long day = (totalTime(world) / 24000L) + 1;
-		int season = (int) (((day - 1) / 30) & 3);
+		int day = getDay(world);
+		int season = ((day - 1) / 30) & 3;
 		return season;
 	}
 
 	/* int上限でカンスト */
 	public static int getDay(World world) {
 		long day = (totalTime(world) / 24000L) + 1;
-		if (day > Integer.MAX_VALUE - 1)
-			day = Integer.MAX_VALUE;
+		if (day > Integer.MAX_VALUE)
+			day -= Integer.MAX_VALUE;
 		return (int) day;
 	}
 
+	public static int getWeek(World world) {
+		int day = getDay(world);
+		int week = (((day - 1) / 7));
+		return week;
+	}
+
 	public static int getYear(World world) {
-		long day = (totalTime(world) / 24000L) + 1;
-		int season = (int) (((day - 1) / 120));
-		return season;
+		int day = getDay(world);
+		int year = (((day - 1) / 120));
+		return year;
 	}
 
 }

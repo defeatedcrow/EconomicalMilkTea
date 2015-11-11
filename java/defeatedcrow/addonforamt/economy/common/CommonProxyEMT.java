@@ -9,14 +9,17 @@ import defeatedcrow.addonforamt.economy.client.gui.ContainerDistributor;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerENTank;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerGeneratorEMT;
+import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderDisplay;
 import defeatedcrow.addonforamt.economy.client.gui.GuiDistributor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENTank;
 import defeatedcrow.addonforamt.economy.client.gui.GuiGeneratorEMT;
+import defeatedcrow.addonforamt.economy.client.gui.GuiOrderDisplay;
 import defeatedcrow.addonforamt.economy.common.block.TileDistributor;
 import defeatedcrow.addonforamt.economy.common.block.TileENMotor;
 import defeatedcrow.addonforamt.economy.common.block.TileENTank;
 import defeatedcrow.addonforamt.economy.common.block.TileGeneratorEMT;
+import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 
 public class CommonProxyEMT implements IGuiHandler {
 
@@ -47,6 +50,7 @@ public class CommonProxyEMT implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileENMotor.class, "defeatedcrow.emt.motorTile");
 		GameRegistry.registerTileEntity(TileENTank.class, "defeatedcrow.emt.entankTile");
 		GameRegistry.registerTileEntity(TileGeneratorEMT.class, "defeatedcrow.emt.generatorTile");
+		GameRegistry.registerTileEntity(TileOrderBoard.class, "defeatedcrow.emt.orderBoard");
 	}
 
 	// GUIの登録
@@ -63,6 +67,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new ContainerENMotor(player, (TileENMotor) tileentity);
 		} else if (tileentity instanceof TileDistributor) {
 			return new ContainerDistributor(player, (TileDistributor) tileentity);
+		} else if (tileentity instanceof TileOrderBoard) {
+			return new ContainerOrderDisplay(player, (TileOrderBoard) tileentity);
 		}
 		return null;
 	}
@@ -80,6 +86,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new GuiENMotor(player, (TileENMotor) tileentity);
 		} else if (tileentity instanceof TileDistributor) {
 			return new GuiDistributor(player, (TileDistributor) tileentity);
+		} else if (tileentity instanceof TileOrderBoard) {
+			return new GuiOrderDisplay(player, (TileOrderBoard) tileentity);
 		}
 		return null;
 	}

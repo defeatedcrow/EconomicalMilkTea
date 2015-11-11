@@ -18,4 +18,6 @@ dcs.energy.distributor.gui=Distribution Board Gui
 dcs.energy.motorInv.gui=Yuzu Energy Motor Gui
 dcs.energy.tankInv.gui=Yuzu Energy Tank Gui
 dcs.energy.generatorInv.gui=Diesel Yuzu Generator Gui
+dcs.energy.order.word1=Remaining 
+dcs.energy.order.word2= Day
 

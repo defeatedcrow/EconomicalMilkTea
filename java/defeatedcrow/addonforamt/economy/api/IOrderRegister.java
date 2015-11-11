@@ -20,8 +20,11 @@ public interface IOrderRegister {
 	 *            : 期限に設定する季節
 	 * @param biome
 	 *            : 出現バイオーム
+	 * @param name
+	 *            : オーダーのタイトル
 	 */
-	void addRecipe(Object item, int require, int reward, OrderType type, OrderSeason season, OrderBiome biome);
+	void addRecipe(Object item, int require, int reward, OrderType type, OrderSeason season, OrderBiome biome,
+			String name);
 
 	List<? extends IOrder> getSingleOrders();
 

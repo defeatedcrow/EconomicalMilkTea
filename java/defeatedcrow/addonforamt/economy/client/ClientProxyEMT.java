@@ -28,6 +28,7 @@ import defeatedcrow.addonforamt.economy.common.block.TileDistributor;
 import defeatedcrow.addonforamt.economy.common.block.TileENMotor;
 import defeatedcrow.addonforamt.economy.common.block.TileENTank;
 import defeatedcrow.addonforamt.economy.common.block.TileGeneratorEMT;
+import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 import defeatedcrow.addonforamt.economy.event.HandleCoodTicketEvent;
 
 public class ClientProxyEMT extends CommonProxyEMT {
@@ -64,6 +65,7 @@ public class ClientProxyEMT extends CommonProxyEMT {
 		ClientRegistry.registerTileEntity(TileENMotor.class, "defeatedcrow.emt.motorTile", new TESRENMotor());
 		ClientRegistry.registerTileEntity(TileENTank.class, "defeatedcrow.emt.entankTile", new TESRENTank());
 		GameRegistry.registerTileEntity(TileGeneratorEMT.class, "defeatedcrow.emt.generatorTile");
+		GameRegistry.registerTileEntity(TileOrderBoard.class, "defeatedcrow.emt.orderBoard");
 	}
 
 	@Override

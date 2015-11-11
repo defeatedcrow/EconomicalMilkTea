@@ -16,35 +16,21 @@ import defeatedcrow.addonforamt.economy.util.TimeUtil;
 public class OrderBase implements IOrder {
 
 	private final Object reqItem;
-	private final ArrayList<ItemStack> reqItemList;
 	private final int require;
 	private final int reward;
 	private final OrderType type;
 	private final OrderSeason season;
 	private final OrderBiome biome;
+	private final String orderName;
 
-	public OrderBase(Object item, int req, int rew, OrderType t, OrderSeason s, OrderBiome b) {
+	public OrderBase(Object item, int req, int rew, OrderType t, OrderSeason s, OrderBiome b, String name) {
 		reqItem = item;
-		reqItemList = new ArrayList<ItemStack>();
 		require = req;
 		reward = rew;
 		type = t;
 		season = s;
 		biome = b;
-
-		if (item != null) {
-			if (item instanceof String && !OreDictionary.getOres((String) item).isEmpty()) {
-				reqItemList.addAll(OreDictionary.getOres((String) item));
-			} else if (item instanceof ItemStack) {
-				reqItemList.add(((ItemStack) item).copy());
-			} else if (item instanceof Item) {
-				reqItemList.add(new ItemStack((Item) item, 1, 0));
-			} else if (item instanceof Block) {
-				reqItemList.add(new ItemStack((Block) item, 1, 0));
-			} else {
-				throw new IllegalArgumentException("Unknown Object passed to recipe!");
-			}
-		}
+		orderName = name;
 	}
 
 	@Override
@@ -54,6 +40,18 @@ public class OrderBase implements IOrder {
 
 	@Override
 	public ArrayList<ItemStack> getProcessedRequests() {
+		ArrayList<ItemStack> reqItemList = new ArrayList<ItemStack>();
+		if (reqItem != null) {
+			if (reqItem instanceof String && !OreDictionary.getOres((String) reqItem).isEmpty()) {
+				reqItemList.addAll(OreDictionary.getOres((String) reqItem));
+			} else if (reqItem instanceof ItemStack) {
+				reqItemList.add(((ItemStack) reqItem).copy());
+			} else if (reqItem instanceof Item) {
+				reqItemList.add(new ItemStack((Item) reqItem, 1, 0));
+			} else if (reqItem instanceof Block) {
+				reqItemList.add(new ItemStack((Block) reqItem, 1, 0));
+			}
+		}
 		return reqItemList;
 	}
 
@@ -94,7 +92,7 @@ public class OrderBase implements IOrder {
 
 	@Override
 	public boolean matches(ItemStack items) {
-		ArrayList<ItemStack> required = new ArrayList<ItemStack>(this.reqItemList);
+		ArrayList<ItemStack> required = new ArrayList<ItemStack>(this.getProcessedRequests());
 		boolean match = false;
 
 		for (ItemStack tar : required) {
@@ -104,6 +102,11 @@ public class OrderBase implements IOrder {
 		}
 
 		return match;
+	}
+
+	@Override
+	public String getName() {
+		return orderName;
 	}
 
 }

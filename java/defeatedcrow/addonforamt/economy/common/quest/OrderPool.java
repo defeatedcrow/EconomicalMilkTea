@@ -29,9 +29,10 @@ public class OrderPool implements IOrderRegister {
 	}
 
 	@Override
-	public void addRecipe(Object item, int require, int reward, OrderType type, OrderSeason season, OrderBiome biome) {
+	public void addRecipe(Object item, int require, int reward, OrderType type, OrderSeason season, OrderBiome biome,
+			String name) {
 		if (item != null && require > 0 && reward > 0) {
-			OrderBase newOrder = new OrderBase(item, require, reward, type, season, biome);
+			OrderBase newOrder = new OrderBase(item, require, reward, type, season, biome, name);
 			switch (type) {
 			case SINGLE:
 				this.orderSingle.add(newOrder);

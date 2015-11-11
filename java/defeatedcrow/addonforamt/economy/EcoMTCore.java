@@ -22,6 +22,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 import defeatedcrow.addonforamt.economy.common.CommonProxyEMT;
+import defeatedcrow.addonforamt.economy.common.quest.OrderPool;
+import defeatedcrow.addonforamt.economy.common.quest.OrderRegister;
 import defeatedcrow.addonforamt.economy.common.recipe.FuelFluidRegister;
 import defeatedcrow.addonforamt.economy.common.recipe.RegisterBasicRecipe;
 import defeatedcrow.addonforamt.economy.common.recipe.RegisterMachineRecipe;
@@ -81,9 +83,13 @@ public class EcoMTCore {
 	public static int guiTank = 1;
 	public static int guiMotor = 2;
 	public static int guiDist = 3;
+	public static int guiBoard = 4;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		RecipeManagerEMT.fuelRegister = new FuelFluidRegister();
+		RecipeManagerEMT.orderRegister = new OrderPool();
+
 		MaterialEMT.init();
 
 		ChunkLoaderController.getInstance().preInit(event);
@@ -94,7 +100,7 @@ public class EcoMTCore {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		RecipeManagerEMT.fuelRegister = new FuelFluidRegister();
+
 		dummyRB = proxy.getRenderID();
 
 		proxy.registerTileEntity();
@@ -107,6 +113,7 @@ public class EcoMTCore {
 	public void postInit(FMLPostInitializationEvent event) {
 		RegisterMachineRecipe.addRecipe();
 		RegisterBasicRecipe.addRecipe();
+		OrderRegister.addBasicOrder();
 		MCEPlugin.load();
 	}
 

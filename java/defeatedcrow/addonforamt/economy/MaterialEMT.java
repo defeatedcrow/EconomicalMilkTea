@@ -11,6 +11,7 @@ import defeatedcrow.addonforamt.economy.common.block.ItemENTank;
 import defeatedcrow.addonforamt.economy.common.item.ItemCoodTicket;
 import defeatedcrow.addonforamt.economy.common.item.ItemENTicket;
 import defeatedcrow.addonforamt.economy.common.item.ItemOilCan;
+import defeatedcrow.addonforamt.economy.common.quest.BlockQuestBoard;
 
 public class MaterialEMT {
 
@@ -27,6 +28,8 @@ public class MaterialEMT {
 		GameRegistry.registerBlock(EcoMTCore.motor, ItemMachineBlock.class, "defeatedcrow.emt.en_motor");
 
 		GameRegistry.registerBlock(EcoMTCore.kariShop, "defeatedcrow.emt.kari_shop");
+
+		GameRegistry.registerBlock(EcoMTCore.questKanban, "defeatedcrow.emt.order_board");
 
 		GameRegistry.registerItem(EcoMTCore.ticket, "defeatedcrow.emt.en_ticket");
 		GameRegistry.registerItem(EcoMTCore.checker, "defeatedcrow.emt.cood_ticket");
@@ -49,6 +52,9 @@ public class MaterialEMT {
 				EcoMTCore.economy);
 
 		EcoMTCore.kariShop = (new BlockKariShop()).setBlockName("defeatedcrow.emt.kari_shop").setCreativeTab(
+				EcoMTCore.economy);
+
+		EcoMTCore.questKanban = (new BlockQuestBoard()).setBlockName("defeatedcrow.emt.order_board").setCreativeTab(
 				EcoMTCore.economy);
 	}
 
