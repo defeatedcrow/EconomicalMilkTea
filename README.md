@@ -10,7 +10,7 @@
 
 ### 動作環境:
 ・Minecraft 1.7.10
-<br>・MinecraftForge 10.13.0.1448+
+<br>・MinecraftForge 10.13.4.1448+
 <br>・AppleMilkTea2 2.8e+
 <br>・MCEconomy2 2.4.5++
  
