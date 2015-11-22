@@ -194,7 +194,7 @@ public abstract class QuestTileBase extends TileEntity implements ISidedInventor
 				s = OrderSeason.NONE;
 
 			// 夜明けに一度だけ判定を行う
-			if (this.displayItems[0] == null || TimeUtil.isDayTime(worldObj) && lastDay != day) {
+			if (this.displayItems[0] == null || (TimeUtil.isDayTime(worldObj) && lastDay != day)) {
 				// 前orderの納品とdateの更新
 				this.onTrade(OrderType.SINGLE, lastDay);
 				this.start[0] = day;
