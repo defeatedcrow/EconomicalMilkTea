@@ -117,7 +117,7 @@ public class OrderRegister {
 			RecipeManagerEMT.orderRegister.addRecipe("cropApple", 640, 18000 * ad[i], OrderType.MIDDLE,
 					OrderSeason.SPRING, biome[i], "dcs.emt.ordername.middle_spring_apple");
 
-			RecipeManagerEMT.orderRegister.addRecipe("cropCassis", 640, 1500 * ad[i], OrderType.MIDDLE,
+			RecipeManagerEMT.orderRegister.addRecipe("cropCassis", 640, 15000 * ad[i], OrderType.MIDDLE,
 					OrderSeason.SPRING, biome[i], "dcs.emt.ordername.middle_spring_cassis");
 
 			RecipeManagerEMT.orderRegister.addRecipe("foodClam", 320, 18000 * ad[i], OrderType.MIDDLE,

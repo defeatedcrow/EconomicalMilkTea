@@ -27,6 +27,7 @@ import defeatedcrow.addonforamt.economy.common.quest.OrderRegister;
 import defeatedcrow.addonforamt.economy.common.recipe.FuelFluidRegister;
 import defeatedcrow.addonforamt.economy.common.recipe.RegisterBasicRecipe;
 import defeatedcrow.addonforamt.economy.common.recipe.RegisterMachineRecipe;
+import defeatedcrow.addonforamt.economy.packet.EMTPacketHandler;
 import defeatedcrow.addonforamt.economy.plugin.mce.MCEPlugin;
 import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 
@@ -63,10 +64,12 @@ public class EcoMTCore {
 	public static Block questKanban; // 納品クエストの確認
 
 	public static Block exchanger; // 両替
+	public static Block safetyBox; // 金庫
 
 	public static Block kariShop;
 
 	// item
+	public static Item yukiti; // 一万円札
 	public static Item ticket; // 月額チケット
 	public static Item checker; // 受信機との接続用
 	public static Item stamp; // ポイントをためよう
@@ -84,6 +87,7 @@ public class EcoMTCore {
 	public static int guiMotor = 2;
 	public static int guiDist = 3;
 	public static int guiBoard = 4;
+	public static int guiSafety = 5;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -107,6 +111,8 @@ public class EcoMTCore {
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 		proxy.loadInit();
+
+		EMTPacketHandler.init();
 	}
 
 	@EventHandler
@@ -136,5 +142,4 @@ public class EcoMTCore {
 	public String getModID() {
 		return "DCsEcoMT";
 	}
-
 }

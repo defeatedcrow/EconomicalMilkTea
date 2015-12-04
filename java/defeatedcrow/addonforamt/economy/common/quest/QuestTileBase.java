@@ -330,7 +330,9 @@ public abstract class QuestTileBase extends TileEntity implements ISidedInventor
 
 			if (list.size() > 1) {
 				int i = list.size() - 1;
-				int getID = (this.getKey() + count) % i;
+				int key = Math.abs(this.getKey() + count);
+				int getID = key % i;
+				EMTLogger.debugInfo("debug : num = " + getID);
 				return list.get(getID);
 			} else {
 				return list.get(0);

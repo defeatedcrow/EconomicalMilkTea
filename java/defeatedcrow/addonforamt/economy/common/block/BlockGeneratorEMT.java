@@ -166,7 +166,6 @@ public class BlockGeneratorEMT extends BlockContainer {
 		default:
 			return this.texS;
 		}
-
 	}
 
 	@Override

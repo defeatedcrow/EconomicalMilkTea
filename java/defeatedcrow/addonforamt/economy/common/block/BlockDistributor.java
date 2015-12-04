@@ -80,6 +80,19 @@ public class BlockDistributor extends BlockContainer implements IChunkBlock {
 
 		if (tileentity != null) {
 
+			ItemStack block = new ItemStack(this, 1, 0);
+
+			float a = this.rand.nextFloat() * 0.8F + 0.1F;
+			float a1 = this.rand.nextFloat() * 0.8F + 0.1F;
+			float a2 = this.rand.nextFloat() * 0.8F + 0.1F;
+			EntityItem drop = new EntityItem(par1World, par2 + a, par3 + a1, par4 + a2, block);
+
+			float a3 = 0.05F;
+			drop.motionX = (float) this.rand.nextGaussian() * a3;
+			drop.motionY = (float) this.rand.nextGaussian() * a3 + 0.2F;
+			drop.motionZ = (float) this.rand.nextGaussian() * a3;
+			par1World.spawnEntityInWorld(drop);
+
 			for (int j1 = 0; j1 < tileentity.getSizeInventory(); ++j1) {
 				ItemStack itemstack = tileentity.getStackInSlot(j1);
 

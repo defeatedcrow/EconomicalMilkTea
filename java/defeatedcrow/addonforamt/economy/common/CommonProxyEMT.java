@@ -1,6 +1,7 @@
 package defeatedcrow.addonforamt.economy.common;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -10,16 +11,20 @@ import defeatedcrow.addonforamt.economy.client.gui.ContainerENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerENTank;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderDisplay;
+import defeatedcrow.addonforamt.economy.client.gui.ContainerSafetyBox;
 import defeatedcrow.addonforamt.economy.client.gui.GuiDistributor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENTank;
 import defeatedcrow.addonforamt.economy.client.gui.GuiGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.GuiOrderDisplay;
+import defeatedcrow.addonforamt.economy.client.gui.GuiSafetyBox;
 import defeatedcrow.addonforamt.economy.common.block.TileDistributor;
 import defeatedcrow.addonforamt.economy.common.block.TileENMotor;
 import defeatedcrow.addonforamt.economy.common.block.TileENTank;
 import defeatedcrow.addonforamt.economy.common.block.TileGeneratorEMT;
 import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
+import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
+import defeatedcrow.showcase.common.SCLogger;
 
 public class CommonProxyEMT implements IGuiHandler {
 
@@ -50,7 +55,8 @@ public class CommonProxyEMT implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileENMotor.class, "defeatedcrow.emt.motorTile");
 		GameRegistry.registerTileEntity(TileENTank.class, "defeatedcrow.emt.entankTile");
 		GameRegistry.registerTileEntity(TileGeneratorEMT.class, "defeatedcrow.emt.generatorTile");
-		GameRegistry.registerTileEntity(TileOrderBoard.class, "defeatedcrow.emt.orderBoard");
+		GameRegistry.registerTileEntity(TileOrderBoard.class, "defeatedcrow.emt.orderBoardTile");
+		GameRegistry.registerTileEntity(TileSafetyBox.class, "defeatedcrow.emt.safetyTile");
 	}
 
 	// GUIの登録
@@ -69,6 +75,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new ContainerDistributor(player, (TileDistributor) tileentity);
 		} else if (tileentity instanceof TileOrderBoard) {
 			return new ContainerOrderDisplay(player, (TileOrderBoard) tileentity);
+		} else if (tileentity instanceof TileSafetyBox) {
+			return new ContainerSafetyBox(player, (TileSafetyBox) tileentity);
 		}
 		return null;
 	}
@@ -88,6 +96,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new GuiDistributor(player, (TileDistributor) tileentity);
 		} else if (tileentity instanceof TileOrderBoard) {
 			return new GuiOrderDisplay(player, (TileOrderBoard) tileentity);
+		} else if (tileentity instanceof TileSafetyBox) {
+			return new GuiSafetyBox(player, (TileSafetyBox) tileentity);
 		}
 		return null;
 	}
@@ -97,6 +107,18 @@ public class CommonProxyEMT implements IGuiHandler {
 
 	public void loadInit() {
 
+	}
+
+	public boolean getOP(String name) {
+		if (!MinecraftServer.getServer().isSinglePlayer()) {
+			String ops[] = MinecraftServer.getServer().getConfigurationManager().func_152603_m().func_152685_a();
+			for (String op : ops) {
+				if (op != null && op.equalsIgnoreCase(name))
+					SCLogger.debugInfo("Server OP was detected. " + op);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
