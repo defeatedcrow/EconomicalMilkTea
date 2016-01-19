@@ -1,6 +1,5 @@
 package defeatedcrow.addonforamt.economy.common.recipe;
 
-import mods.defeatedcrow.common.DCsAppleMilk;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -40,8 +39,8 @@ public class RegisterBasicRecipe {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(EcoMTCore.checker, 1, 0),
 				new Object[] { new ItemStack(EcoMTCore.checker, 1, 0) }));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(EcoMTCore.kariShop, 1, 0), new Object[] {
-				new ItemStack(DCsAppleMilk.leafTea, 1, 0),
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(EcoMTCore.emtShop, 1, 0), new Object[] {
+				"cropTea",
 				new ItemStack(Item.getItemFromBlock(Blocks.crafting_table), 1, 0) }));
 	}
 

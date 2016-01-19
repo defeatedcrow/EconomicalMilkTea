@@ -3,7 +3,7 @@
   "modid": "DCsEcoMT",
   "name": "EconomicalMilkTea!",
   "description": "Economical life, economical milk tea.",
-  "version": "1.7.10_alpha2",
+  "version": "1.7.10_beta3",
   "mcversion": "1.7.10",
   "url": "http://defeatedcrow.wiki.fc2.com/",
   "updateUrl": "http://defeatedcrow.wiki.fc2.com/",
@@ -11,6 +11,6 @@
   "credits": "defeatedcrow",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": [AppleMilkTea2_2.8i+, MCEconomy2_2.4.5]
+  "dependencies": [AppleMilkTea2_2.8i+, MCEconomy2_2.5.0+]
 }
 ]

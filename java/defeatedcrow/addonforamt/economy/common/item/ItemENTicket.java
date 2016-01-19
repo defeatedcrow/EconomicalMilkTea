@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
-import defeatedcrow.addonforamt.economy.api.IEnergyTicket;
+import defeatedcrow.addonforamt.economy.api.energy.IEnergyTicket;
 import defeatedcrow.addonforamt.economy.util.TimeUtil;
 
 public class ItemENTicket extends Item implements IEnergyTicket {

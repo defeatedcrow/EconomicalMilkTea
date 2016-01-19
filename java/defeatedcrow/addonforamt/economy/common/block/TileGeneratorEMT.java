@@ -1,6 +1,5 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
-import mods.defeatedcrow.common.fluid.DCsTank;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -31,7 +30,7 @@ import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IPipeConnection {
 
 	// FluidTank
-	public DCsTank productTank = new DCsTank(8000);
+	public EMTTank productTank = new EMTTank(8000);
 
 	private int lastAmount = 0;
 
@@ -46,7 +45,7 @@ public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IP
 	public void readFromNBT(NBTTagCompound tab) {
 		super.readFromNBT(tab);
 
-		this.productTank = new DCsTank(8000);
+		this.productTank = new EMTTank(8000);
 		if (tab.hasKey("productTank")) {
 			this.productTank.readFromNBT(tab.getCompoundTag("productTank"));
 		}

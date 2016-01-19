@@ -1,10 +1,22 @@
 
+# Tiles
 tile.defeatedcrow.emt.distributor.name=Distribution Board
 tile.defeatedcrow.emt.generator.name=Diesel Yuzu Generator
 tile.defeatedcrow.emt.en_tank.name=Yuzu Energy Tank
 tile.defeatedcrow.emt.en_motor.name=Yuzu Energy Motor
-tile.defeatedcrow.emt.kari_shop.name=Alpha Version Shop
 
+tile.defeatedcrow.emt.emt_shop.name=EMT Shoji Trade Shop
+tile.defeatedcrow.emt.energy_shop.name=Yuzu Machines Shop
+tile.defeatedcrow.emt.cold_shop.name=Cold Shop
+tile.defeatedcrow.emt.engeneer_shop.name=MOD Engeneer's Shop
+tile.defeatedcrow.emt.building_shop.name=Builder's Shop
+tile.defeatedcrow.emt.crop_shop.name=Crop Shop
+
+tile.defeatedcrow.emt.order_board.name=Order Board
+tile.defeatedcrow.emt.order_transaction.name=Transaction Box
+tile.defeatedcrow.emt.safety.name=Cash Box
+
+# Items
 item.defeatedcrow.emt.en_ticket_8_4.name=Monthly Ticket(8CA/t x 4slot)
 item.defeatedcrow.emt.en_ticket_16_4.name=Monthly Ticket(16CA/t x 4slot)
 item.defeatedcrow.emt.en_ticket_4_8.name=Monthly Ticket(4CA/t x 8slot)
@@ -14,10 +26,236 @@ item.defeatedcrow.emt.cood_ticket.name=Coordinate Registration Card
 item.defeatedcrow.emt.fuel_can_camellia.name=Camellia Oil Can
 item.defeatedcrow.emt.fuel_can_vegeoil.name=Vegetable Oil Can
 
-dcs.energy.distributor.gui=Distribution Board Gui
-dcs.energy.motorInv.gui=Yuzu Energy Motor Gui
-dcs.energy.tankInv.gui=Yuzu Energy Tank Gui
-dcs.energy.generatorInv.gui=Diesel Yuzu Generator Gui
-dcs.energy.order.word1=Remaining 
-dcs.energy.order.word2= Day
+item.defeatedcrow.emt.bill.name=Bill
+item.defeatedcrow.emt.bill_wad.name=Half Million MP Wad
+item.defeatedcrow.emt.stamp.name=Order Stamp
+item.defeatedcrow.emt.dummy.name=No Item
 
+item.defeatedcrow.emt.emtItem.name=Economical Milk Tea Pack
+
+item.defeatedcrow.emt.buildcard_b.name=Build Ticket(Vartical Board)
+item.defeatedcrow.emt.buildcard_p.name=Build Ticket(Horizonal Board)
+item.defeatedcrow.emt.buildcard_s.name=Build Ticket(Four Walls)
+item.defeatedcrow.emt.buildcard_r.name=Build Ticket(Roof Stairs)
+item.defeatedcrow.emt.buildcard_c.name=Build Ticket(Clear)
+
+# GUI
+dcs.emt.distributor.gui=Distribution Board Gui
+dcs.emt.motorInv.gui=Yuzu Energy Motor Gui
+dcs.emt.tankInv.gui=Yuzu Energy Tank Gui
+dcs.emt.generatorInv.gui=Diesel Yuzu Generator Gui
+dcs.emt.transaction.gui=Transaction Box Gui
+dcs.emt.safety.gui=Cash Box Gui
+
+dcs.emt.order.word1=Remaining 
+dcs.emt.order.word2= Day
+dcs.emt.order.achieved=Order Achieved!
+dcs.emt.mp.deposit.button=Deposit
+dcs.emt.mp.withdraw.button=Withdraw
+dcs.emt.mp.withdraw.bill=Withdraw as Bill
+dcs.emt.order.dummy.itemMessage=There is no tradable item in this order
+
+# Order
+# long
+dcs.emt.ordername.long_plane_rice=The annual goal!
+dcs.emt.ordername.long_plane_wheat=For the harvest festival!
+dcs.emt.ordername.long_plane_melon=The watermelon trade
+dcs.emt.ordername.long_plane_cactus=Mysterious plants from the desert
+dcs.emt.ordername.long_plane_redmush=Red hat of Fairy
+dcs.emt.ordername.long_arid_apple=Fruit of The distant world
+dcs.emt.ordername.long_arid_wheat=For the harvest festival!
+dcs.emt.ordername.long_arid_pumpkin=Preparing for Halloween
+dcs.emt.ordername.long_arid_melon=The watermelon trade
+dcs.emt.ordername.long_arid_choco=Bittersweet & black
+dcs.emt.ordername.long_damp_rotten=Exterminate zombies!
+dcs.emt.ordername.long_damp_slime=Green flabby things
+dcs.emt.ordername.long_damp_bone=Someone's bone
+dcs.emt.ordername.long_damp_blaze=Flame of limbo
+dcs.emt.ordername.long_damp_spider=Hidden eyes in the dark
+dcs.emt.ordername.long_cold_rice=The annual goal!
+dcs.emt.ordername.long_cold_wheat=For the harvest festival!
+dcs.emt.ordername.long_cold_reeds=Intake to sugar!
+dcs.emt.ordername.long_cold_carrot=For warm stew
+dcs.emt.ordername.long_cold_potato=Necessary food reserves
+dcs.emt.ordername.long_hell_pumpkin=Cage of soul
+dcs.emt.ordername.long_hell_melon=Moisten the thirst
+dcs.emt.ordername.long_hell_reeds=Insanity from sugar!
+dcs.emt.ordername.long_hell_carrot=Salvation of food shortages
+dcs.emt.ordername.long_hell_potato=Necessary food reserves
+
+dcs.emt.ordername.long_arid_cherry=Cherry crops
+dcs.emt.ordername.long_arid_peach=Harvest of peach
+dcs.emt.ordername.long_arid_plum=Harvest of plum
+dcs.emt.ordername.long_arid_lemon=Harvest of lemon
+dcs.emt.ordername.long_arid_orange=Harvest of orange
+dcs.emt.ordername.long_arid_walnut=Harvest of walnut
+dcs.emt.ordername.long_arid_chestnut=Harvest of chestnut
+dcs.emt.ordername.long_arid_parsimmon=Harvest of parsimmon
+dcs.emt.ordername.long_arid_bamboo=Harvest of bamboo
+dcs.emt.ordername.long_cold_onion=Harvest of onion
+dcs.emt.ordername.long_cold_eggplant=Harvest of eggplant
+dcs.emt.ordername.long_cold_soybeans=Harvest of soy beans
+dcs.emt.ordername.long_cold_azuki=Harvest of azuki beans
+dcs.emt.ordername.long_cold_cabbage=Harvest of cabbage
+dcs.emt.ordername.long_cold_leek=Harvest of leek
+dcs.emt.ordername.long_cold_lettuce=Harvest of lettuce
+
+dcs.emt.ordername.long_plane_amt_tea=Harvest of tea
+dcs.emt.ordername.long_plane_amt_mint=Sweet and spicy
+dcs.emt.ordername.long_plane_amt_camellia=Harvest of camellia
+dcs.emt.ordername.long_arid_amt_tea=Tea trade
+dcs.emt.ordername.long_cold_amt_mint=Mint trade
+dcs.emt.ordername.long_cold_amt_camellia=Material of oil
+dcs.emt.ordername.long_hell_amt_clam=infernal clams
+
+dcs.emt.ordername.long_arid_ss2_mushroom=Harvest of shiitake
+dcs.emt.ordername.long_arid_ss2_cucumber=Harvest of cucumber
+dcs.emt.ordername.long_arid_ss2_tomato=Harvest of tomato
+dcs.emt.ordername.long_cold_ss2_turnip=Turnip trade
+dcs.emt.ordername.long_cold_ss2_onion=Onion trade
+dcs.emt.ordername.long_cold_ss2_corn=Corn trade
+dcs.emt.ordername.long_hell_ss2_eggplant=Eggplant trade
+dcs.emt.ordername.long_hell_ss2_sweetpotato=Hell always food shortage
+dcs.emt.ordername.long_hell_ss2_radish=Deliver the vegetables
+dcs.emt.ordername.long_hell_ss2_greenpepper=For stockpile
+
+# middle
+dcs.emt.ordername.middle_spring_apple=Bright red fruit
+dcs.emt.ordername.middle_spring_cassis=The grace of spring
+dcs.emt.ordername.middle_spring_clam=The Doll Festival
+dcs.emt.ordername.middle_spring_honey=Hidden gems in flower
+dcs.emt.ordername.middle_spring_sap=Afforestation!
+dcs.emt.ordername.middle_summer_tomato=Summer vegetable
+dcs.emt.ordername.middle_summer_salt=Blessing of the sea
+dcs.emt.ordername.middle_summer_fish=Let the fishing!
+dcs.emt.ordername.middle_summer_mint=Exciting fragrance
+dcs.emt.ordername.middle_summer_tea=Season of the tea picking
+dcs.emt.ordername.middle_autumn_rice=Golden ear of rice
+dcs.emt.ordername.middle_autumn_grape=For delicious wine
+dcs.emt.ordername.middle_autumn_log=Lack of building materials
+dcs.emt.ordername.middle_autumn_salmon=Love trip
+dcs.emt.ordername.middle_autumn_sap=Forestry work
+dcs.emt.ordername.middle_winter_yuzu=Winter citrus
+dcs.emt.ordername.middle_winter_apple=Hot apple pie!
+dcs.emt.ordername.middle_winter_rose=Collect the rose!
+dcs.emt.ordername.middle_winter_botan=White snow, red peony
+
+dcs.emt.ordername.middle_damp_gunpowder=Collect gunpowder!
+dcs.emt.ordername.middle_damp_arrow=Lack of arrows
+dcs.emt.ordername.middle_damp_rotten=Rotten flesh
+dcs.emt.ordername.middle_damp_slime=Slime gel
+dcs.emt.ordername.middle_damp_string=String of spiders
+dcs.emt.ordername.middle_damp_feather=Feather please
+dcs.emt.ordername.middle_damp_beef=Want to eat beef!
+
+dcs.emt.ordername.middle_onion=Harvest of onion
+dcs.emt.ordername.middle_eggplant=Harvest of eggplant
+dcs.emt.ordername.middle_soybeans=Harvest of soybeans
+dcs.emt.ordername.middle_azuki=Harvest of azuki beans
+dcs.emt.ordername.middle_cabbage=Harvest of cabbage
+dcs.emt.ordername.middle_lettuce=Harvest of lettuce
+dcs.emt.ordername.middle_leek=Harvest of leek
+
+dcs.emt.ordername.middle_ic2_coffee=IC2 coffee beans please
+dcs.emt.ordername.middle_ic2_hops=IC2 hops
+dcs.emt.ordername.middle_ic2_wart=strange blue wart
+dcs.emt.ordername.middle_ic2_grin=For insecticide
+dcs.emt.ordername.middle_ic2_rubberSup=Rubber sapling please
+
+dcs.emt.ordername.middle_ss2_siitake=Harvest of SS2 shiitake
+dcs.emt.ordername.middle_ss2_cucumber=Harvest of SS2 cucumber
+dcs.emt.ordername.middle_ss2_corn=Harvest of SS2 corn
+dcs.emt.ordername.middle_ss2_onion=Harvest of SS2 onion
+dcs.emt.ordername.middle_ss2_eggp=Harvest of SS2 eggplant
+dcs.emt.ordername.middle_ss2_greenp=Harvest of SS2 greenpepper
+dcs.emt.ordername.middle_ss2_radish=Harvest of SS2 radish
+dcs.emt.ordername.middle_ss2_leaves=Harvest of SS2 leaves block
+
+dcs.emt.ordername.middle_ir3_cheese=Good taste cheese
+dcs.emt.ordername.middle_ir3_cotton=Cotton flower
+dcs.emt.ordername.middle_ir3_redSap=Strange red sapling
+dcs.emt.ordername.middle_ir3_goldSap=Bright gold sapling
+dcs.emt.ordername.middle_ir3_seaweed=Collect the seaweed
+
+# short
+dcs.emt.ordername.short_bone_128=Collect a good bone meal!
+dcs.emt.ordername.short_tear_5=Tears of a different world
+dcs.emt.ordername.short_pork_64=Please pork!
+dcs.emt.ordername.short_string_64=Yarn of silk
+dcs.emt.ordername.short_wool_64=To make the blanket
+dcs.emt.ordername.short_rotten_16=Eliminate rotten guys!
+dcs.emt.ordername.short_beef_128=Beef steak party!
+dcs.emt.ordername.short_skull_5=Neck of wanted man
+dcs.emt.ordername.short_egg_64=I love eggs!
+dcs.emt.ordername.short_obsidian_64=Explosion-resistant blocks
+dcs.emt.ordername.short_cake_12=Afternoon tea party
+dcs.emt.ordername.short_brazerod_16=Strange flaming rod
+dcs.emt.ordername.short_rotten_64=Dust to dust
+dcs.emt.ordername.short_bone_64=Need fertilizer
+dcs.emt.ordername.short_ice_16=Coolant is necessary
+dcs.emt.ordername.short_yellowf_32=For flower bed
+dcs.emt.ordername.short_wool_32=For warm clothes
+
+dcs.emt.ordername.short_spring_copperblock=Lack of building materials
+dcs.emt.ordername.short_spring_ironblock=Lack of iron materials
+dcs.emt.ordername.short_spring_silverblock=Mysterious metal
+dcs.emt.ordername.short_spring_brassblock=City of Brass
+
+dcs.emt.ordername.short_ic2_rubber=Rubber please
+dcs.emt.ordername.short_ic2_bronzeP=Lack of bronze materials
+dcs.emt.ordername.short_ic2_steelP=Steel is necessary
+dcs.emt.ordername.short_ic2_scrap=Purchase a scrap
+dcs.emt.ordername.short_ic2_copperC=Copper is necessary
+dcs.emt.ordername.short_ic2_tinC=Tin is necessary
+
+dcs.emt.ordername.short_amt_nikawa=Stickey materials
+dcs.emt.ordername.short_amt_condensedmilk=Condensed milk please
+dcs.emt.ordername.short_amt_yuzujam=Yuzu marmalade
+dcs.emt.ordername.short_amt_chal=What is the chalcedony?
+dcs.emt.ordername.short_amt_icycristal=Icy jems
+dcs.emt.ordername.short_amt_kimwipes=Popular tool in the lab
+
+dcs.emt.ordername.short_ir3_smokesaimon=Autumn salmon
+dcs.emt.ordername.short_ir3_smokebeef=The good snacks of liquor
+
+dcs.emt.ordername.short_ss2_bluegel=Strange blue gel
+dcs.emt.ordername.short_ss2_lilypowder=Lily powder please
+dcs.emt.ordername.short_ss2_brass=Brass plate please
+dcs.emt.ordername.short_ss2_zinc=Zinc plate please
+
+# single
+dcs.emt.ordername.single_bookshelf_5=Donate more books to the library
+dcs.emt.ordername.single_arrow_32=Ammunition shortage
+dcs.emt.ordername.single_tnt_3=Mine! Dig! Explosion!
+dcs.emt.ordername.single_bed_1=Request a furniture
+dcs.emt.ordername.single_apple_5=Want to eat apples
+dcs.emt.ordername.single_waterlily_16=Where is the lotus flower?
+dcs.emt.ordername.single_book_7=Book week
+dcs.emt.ordername.single_minecart_5=Deployment of minecart
+dcs.emt.ordername.single_dispenser_3=Make the floodgate
+dcs.emt.ordername.single_chest_16=Extend warehouse
+dcs.emt.ordername.single_boat_3=My boat fell apart!
+dcs.emt.ordername.single_piston_8=Make the automatic door
+dcs.emt.ordername.single_reeds_32=Lack of sugar
+dcs.emt.ordername.single_glass_16=Window glass was cracking!
+
+dcs.emt.ordername.single_amt_yuzubat=Lack of yuzu battery
+dcs.emt.ordername.single_amt_beer=Beer please!
+dcs.emt.ordername.single_amt_sake=Sake please!
+dcs.emt.ordername.single_amt_appleliqueur=Apple taste liqueur
+dcs.emt.ordername.single_amt_camoil=Flying oil please
+dcs.emt.ordername.single_amt_cassistart=Good taste tart!
+dcs.emt.ordername.single_amt_challamp=Mysterious lamp
+
+dcs.emt.ordername.single_ic2_solar=Solar power!
+dcs.emt.ordername.single_ic2_extractor=Order of processing machinery
+dcs.emt.ordername.single_ic2_efurnace=Order of electric furnace
+dcs.emt.ordername.single_ic2_pump=Pump Wanted
+dcs.emt.ordername.single_ic2_cesu=Necessary of Power equipment
+
+dcs.emt.ordername.single_ss2_riceball=Good taste riceball
+dcs.emt.ordername.single_ss2_curry=Curry rice!
+dcs.emt.ordername.single_ss2_choco=Sweet and melty
+
+dcs.emt.ordername.null=No order
+dcs.emt.ordername.default=Let's harvest!

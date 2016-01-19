@@ -5,6 +5,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,6 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
 import defeatedcrow.addonforamt.economy.packet.EMTPacketHandler;
+import defeatedcrow.addonforamt.economy.packet.MessageWithdrawAsBill;
 import defeatedcrow.addonforamt.economy.packet.MessageWithdrawButton;
 import defeatedcrow.addonforamt.economy.plugin.mce.MPHandler;
 
@@ -44,17 +46,32 @@ public class GuiSafetyBox extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		// インベントリ名の描画
+
 		String s = this.tile.hasCustomInventoryName() ? this.tile.getInventoryName() : I18n.format(
 				this.tile.getInventoryName(), new Object[0]);
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 4, 4210752);
 
+		boolean uni = this.fontRendererObj.getUnicodeFlag();
+		float f = 1.0F;
+		if (uni) {
+			GL11.glScalef(1.0F, 1.0F, 1.0F);
+		} else {
+			GL11.glScalef(0.8F, 0.8F, 0.8F);
+			f = 1.25F;
+		}
+
 		// ボタン
-		String m = "Mode";
-		String d = "Deposit";
-		String w = "Withdraw";
-		this.fontRendererObj.drawString(m, 15, this.ySize / 2 + 3, 4210752);
-		this.fontRendererObj.drawString(d, 88, this.ySize / 2 + 3, 4210752);
-		this.fontRendererObj.drawString(w, 132, this.ySize / 2 + 3, 4210752);
+		// String m = "Mode";
+		String d = StatCollector.translateToLocal("dcs.emt.mp.deposit.button");
+		String w = StatCollector.translateToLocal("dcs.emt.mp.withdraw.button");
+		String b = StatCollector.translateToLocal("dcs.emt.mp.withdraw.bill");
+		// this.fontRendererObj.drawString(m, 15, this.ySize / 2 + 3, 4210752);
+		this.fontRendererObj.drawString(d, (int) ((85 - (d.length() / 2)) * f), (int) ((this.ySize / 2 + 4) * f),
+				4210752);
+		this.fontRendererObj.drawString(w, (int) ((130 - (w.length() / 2)) * f), (int) ((this.ySize / 2 + 4) * f),
+				4210752);
+		this.fontRendererObj.drawString(b, (int) ((15 - (w.length() / 2)) * f), (int) ((this.ySize / 2 + 4) * f),
+				4210752);
 
 		// MP
 		long current = tile.getCurrentMP();
@@ -64,9 +81,12 @@ public class GuiSafetyBox extends GuiContainer {
 
 		String temp = String.format("%06d", temporaryMP) + " MP";
 
-		this.fontRendererObj.drawString(mp, 95, 16, 0xFFFFFF);
-		this.fontRendererObj.drawString(pmp, 10, 16, 0xFFFFFF);
-		this.fontRendererObj.drawString(temp, 55, this.ySize / 2 - 12, 0xFFFFFF);
+		this.fontRendererObj.drawString(mp, (int) ((95) * f), (int) (14 * f), 0xFFFFFF);
+		this.fontRendererObj.drawString(pmp, (int) ((10) * f), (int) (14 * f), 0xFFFFFF);
+		this.fontRendererObj.drawString(temp, (int) ((55) * f), (int) ((this.ySize / 2 - 12) * f), 0xFFFFFF);
+
+		if (!uni)
+			GL11.glScalef(1.25F, 1.25F, 1.25F);
 	}
 
 	@Override
@@ -137,6 +157,13 @@ public class GuiSafetyBox extends GuiContainer {
 			if (ix > 125 && ix < 167 && iy > 101 && iy < 112) {
 				// withdraw;
 				MessageWithdrawButton message = new MessageWithdrawButton(temporaryMP, false, tile.xCoord, tile.yCoord,
+						tile.zCoord);
+				EMTPacketHandler.INSTANCE.sendToServer(message);
+				flag = true;
+			}
+			if (ix > 10 && ix < 75 && iy > 101 && iy < 112) {
+				// withdraw as bill;
+				MessageWithdrawAsBill message = new MessageWithdrawAsBill(temporaryMP, tile.xCoord, tile.yCoord,
 						tile.zCoord);
 				EMTPacketHandler.INSTANCE.sendToServer(message);
 				flag = true;

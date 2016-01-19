@@ -4,10 +4,6 @@ import ic2.api.energy.tile.IEnergySource;
 import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeableMachine;
 import mods.defeatedcrow.api.energy.IBattery;
-import mods.defeatedcrow.common.config.PropertyHandler;
-import mods.defeatedcrow.plugin.IC2.EUItemHandler;
-import mods.defeatedcrow.plugin.IC2.EUSourceManager;
-import mods.defeatedcrow.plugin.IC2.IEUSourceChannel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -23,6 +19,10 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.IEUSourceChannelEMT;
 
 /**
  * ChargeItemを燃料とするTileEntityのベースクラス。 <br>
@@ -42,28 +42,28 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 	public int cookTime = 0;
 
 	// EU受け入れ用のチャンネル
-	protected IEUSourceChannel EUChannel;
+	protected IEUSourceChannelEMT EUChannel;
 
 	public GeneratorBase() {
 		super();
 		if (Loader.isModLoaded("IC2")) {
-			EUChannel = EUSourceManager.getChannel(this, this.getMaxChargeAmount() * exchangeRateEU(), 1);
+			EUChannel = EUSourceManagerEMT.getChannel(this, this.getMaxChargeAmount() * exchangeRateEU(), 1);
 		}
 	}
 
 	public static int exchangeRateRF() {
 		// RF -> Charge
-		return PropertyHandler.rateRF();
+		return AMTIntegration.RFrate;
 	}
 
 	public static int exchangeRateEU() {
 		// EU -> Charge
-		return PropertyHandler.rateEU();
+		return AMTIntegration.EUrate;
 	}
 
 	public static int exchangeRateGF() {
 		// GF -> Charge
-		return PropertyHandler.rateGF();
+		return AMTIntegration.GFrate;
 	}
 
 	@Override
@@ -278,7 +278,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 		boolean flag = false;
 
 		if (Loader.isModLoaded("IC2")) {
-			flag = EUItemHandler.isChargeable(item);
+			flag = EUItemHandlerEMT.isChargeable(item);
 		} else if (item != null && item.getItem() instanceof IBattery) {
 			flag = true;
 		}
@@ -293,7 +293,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 	public int chargeAnotherBattery(ItemStack item, int inc, boolean isSimulate) {
 		int ret = 0;
 		if (Loader.isModLoaded("IC2")) {
-			int i = EUItemHandler.chargeAmount(item, inc * this.exchangeRateEU(), isSimulate);
+			int i = EUItemHandlerEMT.chargeAmount(item, inc * this.exchangeRateEU(), isSimulate);
 			ret = Math.round(i / this.exchangeRateEU());
 		}
 		return ret;

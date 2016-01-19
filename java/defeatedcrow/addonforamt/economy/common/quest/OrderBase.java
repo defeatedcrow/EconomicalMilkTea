@@ -7,10 +7,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import defeatedcrow.addonforamt.economy.api.IOrder;
-import defeatedcrow.addonforamt.economy.api.OrderBiome;
-import defeatedcrow.addonforamt.economy.api.OrderSeason;
-import defeatedcrow.addonforamt.economy.api.OrderType;
+import defeatedcrow.addonforamt.economy.api.order.IOrder;
+import defeatedcrow.addonforamt.economy.api.order.OrderBiome;
+import defeatedcrow.addonforamt.economy.api.order.OrderSeason;
+import defeatedcrow.addonforamt.economy.api.order.OrderType;
 import defeatedcrow.addonforamt.economy.util.TimeUtil;
 
 public class OrderBase implements IOrder {
@@ -22,8 +22,22 @@ public class OrderBase implements IOrder {
 	private final OrderSeason season;
 	private final OrderBiome biome;
 	private final String orderName;
+	private final int orderID;
 
-	public OrderBase(Object item, int req, int rew, OrderType t, OrderSeason s, OrderBiome b, String name) {
+	// public OrderBase(Object item, int req, int rew, OrderType t, OrderSeason s, OrderBiome b,
+	// String name) {
+	// reqItem = item;
+	// require = req;
+	// reward = rew;
+	// type = t;
+	// season = s;
+	// biome = b;
+	// orderName = name;
+	// orderTotal++;
+	// orderID = orderTotal;
+	// }
+
+	public OrderBase(int id, Object item, int req, int rew, OrderType t, OrderSeason s, OrderBiome b, String name) {
 		reqItem = item;
 		require = req;
 		reward = rew;
@@ -31,6 +45,7 @@ public class OrderBase implements IOrder {
 		season = s;
 		biome = b;
 		orderName = name;
+		orderID = id;
 	}
 
 	@Override
@@ -107,6 +122,11 @@ public class OrderBase implements IOrder {
 	@Override
 	public String getName() {
 		return orderName;
+	}
+
+	@Override
+	public int getID() {
+		return orderID;
 	}
 
 }

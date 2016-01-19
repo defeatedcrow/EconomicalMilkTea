@@ -11,7 +11,12 @@ public class MCEPlugin {
 	}
 
 	public static void load() {
+		(new OrderShopList()).load();
 		(new KariShopList()).load();
+		(new ColdShopList()).load();
+		(new IndustrialShopList()).load();
+		(new BuildingShopList()).load();
+		(new CropShopList()).load();
 		registerMP();
 	}
 

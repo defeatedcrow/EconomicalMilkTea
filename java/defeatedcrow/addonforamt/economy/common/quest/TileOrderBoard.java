@@ -1,5 +1,5 @@
 package defeatedcrow.addonforamt.economy.common.quest;
 
-public class TileOrderBoard extends QuestTileBase {
+public class TileOrderBoard extends OrderTileBase {
 
 }

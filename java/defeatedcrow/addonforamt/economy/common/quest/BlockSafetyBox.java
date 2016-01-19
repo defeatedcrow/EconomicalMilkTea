@@ -116,6 +116,11 @@ public class BlockSafetyBox extends BlockContainer {
 	}
 
 	@Override
+	public int getRenderType() {
+		return EcoMTCore.dummyRB;
+	}
+
+	@Override
 	public int damageDropped(int par1) {
 		return 0;
 	}

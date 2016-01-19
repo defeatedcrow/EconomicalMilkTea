@@ -59,7 +59,6 @@ public class ContainerGeneratorEMT extends Container {
 			par1ICrafting.sendProgressBarUpdate(this, 2, 0);
 			par1ICrafting.sendProgressBarUpdate(this, 3, 0);
 		}
-
 	}
 
 	// 更新を送る

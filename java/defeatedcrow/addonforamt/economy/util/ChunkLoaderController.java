@@ -24,7 +24,7 @@ public class ChunkLoaderController implements LoadingCallback {
 	private static ChunkLoaderController instance;
 
 	// 稼働中のチケット
-	protected static final HashMap<EMTCood, Ticket> ticketList = new HashMap<EMTCood, Ticket>();
+	protected static final HashMap<EMTCoord, Ticket> ticketList = new HashMap<EMTCoord, Ticket>();
 	// 発行済みの全チケット
 	protected static final ArrayList<Ticket> allTicket = new ArrayList<Ticket>();
 
@@ -63,7 +63,7 @@ public class ChunkLoaderController implements LoadingCallback {
 				int i = t.getModData().getInteger("i");
 				int j = t.getModData().getInteger("j");
 
-				EMTCood cood = new EMTCood(i, j);
+				EMTCoord cood = new EMTCoord(i, j);
 				EMTPos pos = new EMTPos(x, y, z);
 
 				if (this.getBlock(t, world) instanceof IChunkBlock) {
@@ -83,7 +83,7 @@ public class ChunkLoaderController implements LoadingCallback {
 	/** 指定した座礁のブロックをChunkLoaderとして起動する */
 	public static boolean setBlockTicket(World world, int x, int y, int z, int i, int j) {
 
-		EMTCood cood = new EMTCood(i, j);
+		EMTCoord cood = new EMTCoord(i, j);
 		EMTPos pos = new EMTPos(x, y, z);
 		boolean b = false;
 
@@ -103,7 +103,7 @@ public class ChunkLoaderController implements LoadingCallback {
 	/** 指定した座礁のChunkLoaderを停止する */
 	public static void deleteBlockTicket(World world, int x, int y, int z, int i, int j) {
 
-		EMTCood cood = new EMTCood(i, j);
+		EMTCoord cood = new EMTCoord(i, j);
 		EMTPos pos = new EMTPos(x, y, z);
 
 		if (ticketList.containsKey(cood)) {
@@ -141,14 +141,14 @@ public class ChunkLoaderController implements LoadingCallback {
 	}
 
 	// Ticketの使い回し
-	private static Ticket getTicketFromList(EMTCood cood) {
+	private static Ticket getTicketFromList(EMTCoord cood) {
 		if (allTicket.isEmpty())
 			return null;
 		for (Ticket t : allTicket) {
 			int i = t.getModData().getInteger("i");
 			int j = t.getModData().getInteger("j");
 
-			EMTCood cood1 = new EMTCood(i, j);
+			EMTCoord cood1 = new EMTCoord(i, j);
 
 			if (cood1.equals(cood)) {
 				return t;

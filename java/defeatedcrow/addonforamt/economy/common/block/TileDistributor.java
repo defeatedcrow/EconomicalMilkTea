@@ -12,7 +12,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import defeatedcrow.addonforamt.economy.EMTLogger;
-import defeatedcrow.addonforamt.economy.api.IEnergyTicket;
+import defeatedcrow.addonforamt.economy.api.energy.IEnergyTicket;
 import defeatedcrow.addonforamt.economy.common.item.ItemCoodTicket;
 import defeatedcrow.addonforamt.economy.util.TimeUtil;
 

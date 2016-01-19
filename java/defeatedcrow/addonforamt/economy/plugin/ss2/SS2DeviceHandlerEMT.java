@@ -1,9 +1,9 @@
 package defeatedcrow.addonforamt.economy.plugin.ss2;
 
-import mods.defeatedcrow.common.DCsAppleMilk;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import shift.sextiarysector.api.gearforce.tileentity.IGearForceHandler;
+import cpw.mods.fml.common.Loader;
 
 public class SS2DeviceHandlerEMT {
 
@@ -11,13 +11,13 @@ public class SS2DeviceHandlerEMT {
 	}
 
 	public static boolean isGFDevice(TileEntity tile) {
-		if (!DCsAppleMilk.SuccessLoadSSector)
+		if (!Loader.isModLoaded("SextiarySector"))
 			return false;
 		return tile instanceof IGearForceHandler;
 	}
 
 	public static int inputEnergy(TileEntity tile, ForgeDirection dir, int tier, int amount, boolean simulate) {
-		if (!DCsAppleMilk.SuccessLoadSSector)
+		if (!Loader.isModLoaded("SextiarySector"))
 			return 0;
 		int ret = 0;
 

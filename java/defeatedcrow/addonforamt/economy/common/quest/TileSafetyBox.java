@@ -10,6 +10,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.api.IMPCoin;
 import defeatedcrow.addonforamt.economy.api.IMPStorageBlock;
@@ -313,7 +314,7 @@ public class TileSafetyBox extends TileEntity implements IMPStorageBlock, ISided
 	// インベントリの名前
 	@Override
 	public String getInventoryName() {
-		return "emt.SafetyBoxInventory";
+		return StatCollector.translateToLocal("dcs.emt.safety.gui");
 	}
 
 	// 多言語対応かどうか

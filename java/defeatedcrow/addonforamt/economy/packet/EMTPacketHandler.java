@@ -8,8 +8,9 @@ public class EMTPacketHandler {
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("DCsEcoMT");
 
 	public static void init() {
-		INSTANCE.registerMessage(MessageHandlerGuiButton.class, MessageGuiButton.class, 0, Side.SERVER);
+		INSTANCE.registerMessage(MessageHandlerGuiOpen.class, MessageGuiOpen.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessageHandlerGuiWithdraw.class, MessageWithdrawButton.class, 1, Side.SERVER);
 		INSTANCE.registerMessage(MessageHandlerUpdateMP.class, MessageUpdateMP.class, 2, Side.CLIENT);
+		INSTANCE.registerMessage(MessageHandlerWithdrawAsBill.class, MessageWithdrawAsBill.class, 3, Side.SERVER);
 	}
 }

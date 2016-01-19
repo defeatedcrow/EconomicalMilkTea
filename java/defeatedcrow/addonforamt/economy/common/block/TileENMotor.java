@@ -5,12 +5,6 @@ import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeItem;
 import mods.defeatedcrow.api.charge.IChargeableMachine;
 import mods.defeatedcrow.api.energy.IBattery;
-import mods.defeatedcrow.common.AMTLogger;
-import mods.defeatedcrow.common.config.PropertyHandler;
-import mods.defeatedcrow.plugin.IC2.EUItemHandler;
-import mods.defeatedcrow.plugin.IC2.EUSinkManager;
-import mods.defeatedcrow.plugin.IC2.IEUSinkChannel;
-import mods.defeatedcrow.plugin.cofh.RFDeviceHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -29,6 +23,12 @@ import cpw.mods.fml.common.ModAPIManager;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import defeatedcrow.addonforamt.economy.EMTLogger;
+import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSinkManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.IEUSinkChannelEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.RFDeviceHandlerEMT;
 import defeatedcrow.addonforamt.economy.plugin.ss2.SS2DeviceHandlerEMT;
 
 @Optional.InterfaceList({ @Optional.Interface(iface = "cofh.api.energy.IEnergyProvider", modid = "CoFHAPI|energy"), })
@@ -53,28 +53,28 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			ForgeDirection.WEST };
 
 	// EU受け入れ用のチャンネル
-	protected IEUSinkChannel EUChannel;
+	protected IEUSinkChannelEMT EUChannel;
 
 	public TileENMotor() {
 		super();
 		if (Loader.isModLoaded("IC2")) {
-			EUChannel = EUSinkManager.getChannel(this, 128, 3);
+			EUChannel = EUSinkManagerEMT.getChannel(this, 128, 3);
 		}
 	}
 
 	public static int exchangeRateRF() {
 		// RF -> Charge
-		return PropertyHandler.rateRF();
+		return AMTIntegration.RFrate;
 	}
 
 	public static int exchangeRateEU() {
 		// EU -> Charge
-		return PropertyHandler.rateEU();
+		return AMTIntegration.EUrate;
 	}
 
 	public static int exchangeRateGF() {
 		// GF -> Charge
-		return PropertyHandler.rateGF();
+		return AMTIntegration.GFrate;
 	}
 
 	@Override
@@ -388,10 +388,10 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			}
 			if (!b && ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
 				int ext2 = ext * this.exchangeRateRF();
-				ext2 = RFDeviceHandler.inputEnergy(opp, tile, ext2, true);
-				if (RFDeviceHandler.isRFDevice(tile) && ext2 > 0) {
-					int i = RFDeviceHandler.inputEnergy(opp, tile, ext2, false);
-					AMTLogger.debugInfo("send RF : " + i);
+				ext2 = RFDeviceHandlerEMT.inputEnergy(opp, tile, ext2, true);
+				if (RFDeviceHandlerEMT.isRFDevice(tile) && ext2 > 0) {
+					int i = RFDeviceHandlerEMT.inputEnergy(opp, tile, ext2, false);
+					EMTLogger.debugInfo("send RF : " + i);
 					i = i / this.exchangeRateRF();
 					this.chargeAmount -= i;
 					b = true;
@@ -558,7 +558,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			int inc = 16; // 速度はチャージバッテリーと同じ
 
 			if (Loader.isModLoaded("IC2") && ret == 0) {
-				int i = EUItemHandler.dischargeAmount(stack, inc * exchangeRateEU(), true);
+				int i = EUItemHandlerEMT.dischargeAmount(stack, inc * exchangeRateEU(), true);
 				ret = Math.round(i / exchangeRateEU());
 			}
 			if (ret == 0) {
@@ -582,10 +582,10 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			int inc = amount;
 
 			if (Loader.isModLoaded("IC2") && ret == 0) {
-				int i = EUItemHandler.dischargeAmount(item, inc * exchangeRateEU(), false);
+				int i = EUItemHandlerEMT.dischargeAmount(item, inc * exchangeRateEU(), false);
 				ret = Math.round(i / exchangeRateEU());
 
-				if (ret > 0 && EUItemHandler.getAmount(item) == 0 && this.itemstacks[1] == null) {
+				if (ret > 0 && EUItemHandlerEMT.getAmount(item) == 0 && this.itemstacks[1] == null) {
 					if (item == null || item.stackSize == 0) {
 						this.setInventorySlotContents(0, null);
 					} else {
@@ -797,7 +797,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 		if (ret > 0) {
 			if (paramBoolean) {
-				AMTLogger.debugInfo("send RF2 : " + extract);
+				EMTLogger.debugInfo("send RF2 : " + extract);
 				this.chargeAmount -= ret;
 			}
 			return extract;

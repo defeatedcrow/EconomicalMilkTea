@@ -2,8 +2,6 @@ package defeatedcrow.addonforamt.economy.client.gui;
 
 import java.util.ArrayList;
 
-import mods.defeatedcrow.common.DCsAppleMilk;
-import mods.defeatedcrow.common.config.PropertyHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.common.block.TileENMotor;
+import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
 
 public class GuiENMotor extends GuiContainer {
 
@@ -45,13 +44,13 @@ public class GuiENMotor extends GuiContainer {
 			ArrayList<String> list1 = new ArrayList<String>();
 			list1.add("Charge Amount : " + charge + "/" + tileentity.getMaxChargeAmount());
 
-			if (DCsAppleMilk.proxy.isShiftKeyDown()) { // shiftキー押下時
-				int vsRF = charge * PropertyHandler.rateRF();
-				int vsEU = charge * PropertyHandler.rateEU();
-				int vsGF = charge * PropertyHandler.rateGF();
-				list1.add(" - " + vsRF + "/" + tileentity.getMaxChargeAmount() * PropertyHandler.rateRF() + " RF");
-				list1.add(" - " + vsEU + "/" + tileentity.getMaxChargeAmount() * PropertyHandler.rateEU() + " EU");
-				list1.add(" - " + vsGF + "/" + tileentity.getMaxChargeAmount() * PropertyHandler.rateGF() + " GF");
+			if (EcoMTCore.proxy.isShiftKeyDown()) { // shiftキー押下時
+				int vsRF = charge * AMTIntegration.RFrate;
+				int vsEU = charge * AMTIntegration.EUrate;
+				int vsGF = charge * AMTIntegration.GFrate;
+				list1.add(" - " + vsRF + "/" + tileentity.getMaxChargeAmount() * AMTIntegration.RFrate + " RF");
+				list1.add(" - " + vsEU + "/" + tileentity.getMaxChargeAmount() * AMTIntegration.EUrate + " EU");
+				list1.add(" - " + vsGF + "/" + tileentity.getMaxChargeAmount() * AMTIntegration.GFrate + " GF");
 			} else {
 				list1.add(EnumChatFormatting.ITALIC + "LShift: Expand tooltip.");
 			}

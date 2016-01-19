@@ -1,6 +1,5 @@
 package defeatedcrow.addonforamt.economy;
 
-import mods.defeatedcrow.common.DCsAppleMilk;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +20,7 @@ public class CreativeTabEMT extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return DCsAppleMilk.batteryItem;
+		return EcoMTCore.stamp;
 	}
 
 }

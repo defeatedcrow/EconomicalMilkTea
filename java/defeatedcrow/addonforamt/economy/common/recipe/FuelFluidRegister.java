@@ -6,9 +6,9 @@ import java.util.List;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import defeatedcrow.addonforamt.economy.EMTLogger;
-import defeatedcrow.addonforamt.economy.api.IFuelFluid;
-import defeatedcrow.addonforamt.economy.api.IFuelFluidRegister;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
+import defeatedcrow.addonforamt.economy.api.energy.IFuelFluid;
+import defeatedcrow.addonforamt.economy.api.energy.IFuelFluidRegister;
 
 public class FuelFluidRegister implements IFuelFluidRegister {
 
