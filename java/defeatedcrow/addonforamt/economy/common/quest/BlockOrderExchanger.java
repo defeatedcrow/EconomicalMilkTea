@@ -73,7 +73,7 @@ public class BlockOrderExchanger extends BlockContainer {
 		if (tileentity != null && tileentity instanceof OrderExchanger) {
 			tile = (OrderExchanger) tileentity;
 		}
-		if (tile != null) {
+		if (tile != null && tile.canHandleMP(player)) {
 			if (world.isRemote) {
 				return true;
 			} else {

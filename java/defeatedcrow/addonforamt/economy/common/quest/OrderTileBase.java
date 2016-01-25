@@ -327,7 +327,7 @@ public abstract class OrderTileBase extends TileEntity implements ISidedInventor
 		int x = this.xCoord >> 4;
 		int z = this.zCoord >> 4;
 		long seed = worldObj.getSeed() & 32767;
-		return (int) seed + x * 13 + z * 67;
+		return (int) seed + x * 7 + z * 13;
 	}
 
 	public IOrder getOrder(OrderBiome biome, OrderType type, int count) {

@@ -51,7 +51,7 @@ public class BlockSafetyBox extends BlockContainer {
 		if (tileentity != null && tileentity instanceof TileSafetyBox) {
 			tile = (TileSafetyBox) tileentity;
 		}
-		if (tile != null) {
+		if (tile != null && tile.canHandleMP(player)) {
 			if (world.isRemote) {
 				return true;
 			} else {

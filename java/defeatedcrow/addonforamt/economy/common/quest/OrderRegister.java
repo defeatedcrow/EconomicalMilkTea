@@ -232,7 +232,7 @@ public class OrderRegister {
 				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.short_string_64");
 
 		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(Blocks.wool, 1, 32767), 64, 6000, OrderType.SHORT,
-				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.wool_64");
+				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.short_wool_64");
 
 		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(Items.rotten_flesh, 1, 0), 16, 1000, OrderType.SHORT,
 				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.short_rotten_16");
@@ -268,7 +268,7 @@ public class OrderRegister {
 				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.short_yellowf_32");
 
 		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(Blocks.wool, 1, 32767), 32, 3000, OrderType.SHORT,
-				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.wool_32");
+				OrderSeason.NONE, OrderBiome.NONE, "dcs.emt.ordername.short_wool_32");
 
 	}
 
