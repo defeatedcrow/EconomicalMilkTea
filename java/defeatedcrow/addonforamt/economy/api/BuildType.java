@@ -2,6 +2,6 @@ package defeatedcrow.addonforamt.economy.api;
 
 public enum BuildType {
 
-	SQUARE, ROOF, PLATE, BOARD;
+	SQUARE, ROOF, PLATE, BOARD, VILLAGE;
 
 }

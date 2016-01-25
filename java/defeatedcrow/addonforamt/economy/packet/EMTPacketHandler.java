@@ -12,5 +12,7 @@ public class EMTPacketHandler {
 		INSTANCE.registerMessage(MessageHandlerGuiWithdraw.class, MessageWithdrawButton.class, 1, Side.SERVER);
 		INSTANCE.registerMessage(MessageHandlerUpdateMP.class, MessageUpdateMP.class, 2, Side.CLIENT);
 		INSTANCE.registerMessage(MessageHandlerWithdrawAsBill.class, MessageWithdrawAsBill.class, 3, Side.SERVER);
+		INSTANCE.registerMessage(MessageHandlerAddStampReward.class, MessageAddStampReward.class, 4, Side.SERVER);
+		INSTANCE.registerMessage(MessageHandlerAddStamp.class, MessageAddStamp.class, 5, Side.SERVER);
 	}
 }

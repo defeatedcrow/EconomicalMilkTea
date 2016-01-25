@@ -39,7 +39,7 @@ import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_beta3",
+		version = "1.7.10_1.0a",
 		dependencies = "required-after:Forge@[10.13.0.1448,);required-after:mceconomy2@[2.5,)")
 public class EcoMTCore {
 
@@ -84,9 +84,12 @@ public class EcoMTCore {
 	public static Item yukiti; // 一万円札
 	public static Item ticket; // 月額チケット
 	public static Item checker; // 受信機との接続用
+
 	public static Item stamp; // ポイントをためよう
 
-	public static Item gift; // ポイントでもらえる
+	public static Item giftCatalog; // ポイントでもらえる
+
+	public static Item staffCard; // ショップ操作用のレンチ的アイテム
 
 	// building
 	public static Item buildCard_b;
@@ -113,6 +116,8 @@ public class EcoMTCore {
 	public static int guiBoard = 4;
 	public static int guiSafety = 5;
 	public static int guiOrder = 6;
+	public static int guiShop = 7;
+	public static int guiCatalog = 8;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -155,11 +160,11 @@ public class EcoMTCore {
 	}
 
 	public int getMajorVersion() {
-		return 0;
+		return 1;
 	}
 
 	public int getMinorVersion() {
-		return 8;
+		return 0;
 	}
 
 	public String getRivision() {

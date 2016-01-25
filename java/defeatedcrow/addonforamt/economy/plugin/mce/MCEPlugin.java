@@ -17,6 +17,7 @@ public class MCEPlugin {
 		(new IndustrialShopList()).load();
 		(new BuildingShopList()).load();
 		(new CropShopList()).load();
+		(new MealShopList()).load();
 		registerMP();
 	}
 
@@ -34,6 +35,23 @@ public class MCEPlugin {
 		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.enTank, 1, 0), 1000); // machine
 		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.motor, 1, 0), 6000); // machine
 		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.generator, 1, 0), 3000); // machine
+
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.emtShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.energyShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.coldShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.cropShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.mealShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.buildShop, 1, 0), 2500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.engeneerShop, 1, 0), 2500);
+
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.questBlock, 1, 0), 1500);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.questKanban, 1, 0), 1000);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.safetyBox, 1, 0), 10000);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.giftCatalog, 1, 0), 1000);
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.staffCard, 1, 0), 500);
+
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.yukiti, 1, 0), 10000); // 同額換金
+		MCEconomyAPI.addPurchaseItem(new ItemStack(EcoMTCore.yukiti, 1, 1), 500000); // 同額換金
 	}
 
 }

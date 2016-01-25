@@ -12,12 +12,15 @@ import defeatedcrow.addonforamt.economy.common.build.ItemClearBuild;
 import defeatedcrow.addonforamt.economy.common.build.ItemPlateBuild;
 import defeatedcrow.addonforamt.economy.common.build.ItemRoofBuild;
 import defeatedcrow.addonforamt.economy.common.build.ItemSimpleBuild;
+import defeatedcrow.addonforamt.economy.common.build.ItemVillageBuild;
 import defeatedcrow.addonforamt.economy.common.item.ItemBill;
 import defeatedcrow.addonforamt.economy.common.item.ItemCoodTicket;
 import defeatedcrow.addonforamt.economy.common.item.ItemDummyForDispray;
 import defeatedcrow.addonforamt.economy.common.item.ItemEMT;
 import defeatedcrow.addonforamt.economy.common.item.ItemENTicket;
+import defeatedcrow.addonforamt.economy.common.item.ItemGiftCatalog;
 import defeatedcrow.addonforamt.economy.common.item.ItemOilCan;
+import defeatedcrow.addonforamt.economy.common.item.ItemStaffCard;
 import defeatedcrow.addonforamt.economy.common.item.ItemStamp;
 import defeatedcrow.addonforamt.economy.common.quest.BlockOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.BlockOrderExchanger;
@@ -28,6 +31,7 @@ import defeatedcrow.addonforamt.economy.common.shop.BlockColdShop;
 import defeatedcrow.addonforamt.economy.common.shop.BlockCropShop;
 import defeatedcrow.addonforamt.economy.common.shop.BlockIndustrialShop;
 import defeatedcrow.addonforamt.economy.common.shop.BlockKariShop;
+import defeatedcrow.addonforamt.economy.common.shop.BlockMealShop;
 import defeatedcrow.addonforamt.economy.common.shop.BlockOrderToolShop;
 
 public class MaterialEMT {
@@ -47,9 +51,10 @@ public class MaterialEMT {
 		GameRegistry.registerBlock(EcoMTCore.emtShop, "defeatedcrow.emt.energy_shop");
 		GameRegistry.registerBlock(EcoMTCore.energyShop, "defeatedcrow.emt.emt_shop");
 		GameRegistry.registerBlock(EcoMTCore.coldShop, "defeatedcrow.emt.cold_shop");
+		GameRegistry.registerBlock(EcoMTCore.cropShop, "defeatedcrow.emt.crop_shop");
+		GameRegistry.registerBlock(EcoMTCore.mealShop, "defeatedcrow.emt.meal_shop");
 		GameRegistry.registerBlock(EcoMTCore.engeneerShop, "defeatedcrow.emt.engeneer_shop");
 		GameRegistry.registerBlock(EcoMTCore.buildShop, "defeatedcrow.emt.building_shop");
-		GameRegistry.registerBlock(EcoMTCore.cropShop, "defeatedcrow.emt.crop_shop");
 
 		GameRegistry.registerBlock(EcoMTCore.questKanban, "defeatedcrow.emt.order_board");
 		GameRegistry.registerBlock(EcoMTCore.questBlock, ItemSafetyBox.class, "defeatedcrow.emt.order_transaction");
@@ -59,6 +64,8 @@ public class MaterialEMT {
 		GameRegistry.registerItem(EcoMTCore.ticket, "defeatedcrow.emt.en_ticket");
 		GameRegistry.registerItem(EcoMTCore.checker, "defeatedcrow.emt.cood_ticket");
 		GameRegistry.registerItem(EcoMTCore.stamp, "defeatedcrow.emt.stamp");
+		GameRegistry.registerItem(EcoMTCore.giftCatalog, "defeatedcrow.emt.stamp_catalog");
+		GameRegistry.registerItem(EcoMTCore.staffCard, "defeatedcrow.emt.staffcard");
 		GameRegistry.registerItem(EcoMTCore.dummyItem, "defeatedcrow.emt.dummy");
 
 		GameRegistry.registerItem(EcoMTCore.fuelCan, "defeatedcrow.emt.fuel_can");
@@ -68,6 +75,7 @@ public class MaterialEMT {
 		GameRegistry.registerItem(EcoMTCore.buildCard_s, "defeatedcrow.emt.buildcard_s");
 		GameRegistry.registerItem(EcoMTCore.buildCard_r, "defeatedcrow.emt.buildcard_r");
 		GameRegistry.registerItem(EcoMTCore.buildCard_c, "defeatedcrow.emt.buildcard_c");
+		GameRegistry.registerItem(EcoMTCore.villageCard, "defeatedcrow.emt.villagecard");
 
 		GameRegistry.registerItem(EcoMTCore.EMT, "defeatedcrow.emt.emtItem");
 	}
@@ -104,6 +112,9 @@ public class MaterialEMT {
 		EcoMTCore.cropShop = (new BlockCropShop()).setBlockName("defeatedcrow.emt.crop_shop").setCreativeTab(
 				EcoMTCore.economy);
 
+		EcoMTCore.mealShop = (new BlockMealShop()).setBlockName("defeatedcrow.emt.meal_shop").setCreativeTab(
+				EcoMTCore.economy);
+
 		EcoMTCore.questKanban = (new BlockOrderBoard()).setBlockName("defeatedcrow.emt.order_board").setCreativeTab(
 				EcoMTCore.economy);
 
@@ -130,6 +141,12 @@ public class MaterialEMT {
 		EcoMTCore.stamp = (new ItemStamp()).setUnlocalizedName("defeatedcrow.emt.stamp").setCreativeTab(
 				EcoMTCore.economy);
 
+		EcoMTCore.giftCatalog = (new ItemGiftCatalog()).setUnlocalizedName("defeatedcrow.emt.stamp_catalog")
+				.setCreativeTab(EcoMTCore.economy);
+
+		EcoMTCore.staffCard = (new ItemStaffCard()).setUnlocalizedName("defeatedcrow.emt.staffcard").setCreativeTab(
+				EcoMTCore.economy);
+
 		EcoMTCore.dummyItem = (new ItemDummyForDispray()).setUnlocalizedName("defeatedcrow.emt.dummy");
 
 		EcoMTCore.EMT = (new ItemEMT()).setUnlocalizedName("defeatedcrow.emt.emtItem")
@@ -148,6 +165,9 @@ public class MaterialEMT {
 				.setCreativeTab(EcoMTCore.economyBuild);
 
 		EcoMTCore.buildCard_c = (new ItemClearBuild()).setUnlocalizedName("defeatedcrow.emt.buildcard_c")
+				.setCreativeTab(EcoMTCore.economyBuild);
+
+		EcoMTCore.villageCard = (new ItemVillageBuild()).setUnlocalizedName("defeatedcrow.emt.villagecard")
 				.setCreativeTab(EcoMTCore.economyBuild);
 	}
 

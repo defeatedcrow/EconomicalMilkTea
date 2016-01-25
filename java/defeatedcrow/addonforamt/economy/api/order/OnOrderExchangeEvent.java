@@ -20,7 +20,7 @@ public class OnOrderExchangeEvent extends Event {
 	public final World world;
 	public final ItemStack require;
 	public final int requireNum;
-	public final int rewaedMP;
+	public final int rewardMP;
 	public final List<ItemStack> rewards;
 	public final TileEntity thisTile;
 	public final float grade;
@@ -32,7 +32,7 @@ public class OnOrderExchangeEvent extends Event {
 		this.ownerName = owner;
 		this.require = reqItem;
 		this.requireNum = reqNum;
-		this.rewaedMP = reward;
+		this.rewardMP = reward;
 		this.rewards = rewardItems;
 		this.thisTile = tile;
 		this.grade = orderGrade;

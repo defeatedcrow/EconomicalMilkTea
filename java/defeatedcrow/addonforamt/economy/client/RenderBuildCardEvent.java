@@ -120,7 +120,7 @@ public class RenderBuildCardEvent {
 	}
 
 	private double getMinY(double pre, int range, int dir, BuildType type, int side) {
-		if (type == BuildType.BOARD || type == BuildType.SQUARE) {
+		if (type == BuildType.BOARD || type == BuildType.SQUARE || type == BuildType.VILLAGE) {
 			return pre + 1.0D;
 		}
 		return pre;
@@ -131,6 +131,8 @@ public class RenderBuildCardEvent {
 			return pre + 1.0D;
 		} else if (type == BuildType.BOARD || type == BuildType.SQUARE) {
 			return pre + range + 1.0D;
+		} else if (type == BuildType.VILLAGE) {
+			return pre + range * 2;
 		}
 		return pre + range;
 	}

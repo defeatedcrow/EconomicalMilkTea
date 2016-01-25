@@ -30,10 +30,10 @@ public class FluidityIntegration {
 
 	public static ArrayList<IProduct> getColdProductList() {
 		ArrayList<IProduct> list = new ArrayList<IProduct>();
-		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 0), 500));
-		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 2), 200));
-		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 3), 200));
-		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 7), 100));
+		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 3), 500));
+		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 7), 200));
+		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 0), 200));
+		list.add(new EMTProduct(new ItemStack(FluidityCore.flourCont, 1, 2), 100));
 		return list;
 	}
 

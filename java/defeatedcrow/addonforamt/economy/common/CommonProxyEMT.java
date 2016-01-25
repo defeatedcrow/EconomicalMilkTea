@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerDistributor;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerENTank;
@@ -13,6 +14,8 @@ import defeatedcrow.addonforamt.economy.client.gui.ContainerGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderDisplay;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderExchanger;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerSafetyBox;
+import defeatedcrow.addonforamt.economy.client.gui.ContainerShopDisp;
+import defeatedcrow.addonforamt.economy.client.gui.ContainerStampCatalog;
 import defeatedcrow.addonforamt.economy.client.gui.GuiDistributor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENMotor;
 import defeatedcrow.addonforamt.economy.client.gui.GuiENTank;
@@ -20,6 +23,8 @@ import defeatedcrow.addonforamt.economy.client.gui.GuiGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.GuiOrderDisplay;
 import defeatedcrow.addonforamt.economy.client.gui.GuiOrderExchanger;
 import defeatedcrow.addonforamt.economy.client.gui.GuiSafetyBox;
+import defeatedcrow.addonforamt.economy.client.gui.GuiShopDisp;
+import defeatedcrow.addonforamt.economy.client.gui.GuiStampCatalog;
 import defeatedcrow.addonforamt.economy.common.block.TileDistributor;
 import defeatedcrow.addonforamt.economy.common.block.TileENMotor;
 import defeatedcrow.addonforamt.economy.common.block.TileENTank;
@@ -28,6 +33,8 @@ import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
 import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
 import defeatedcrow.addonforamt.economy.common.shop.TileColdShop;
+import defeatedcrow.addonforamt.economy.common.shop.TileDisplayShop;
+import defeatedcrow.addonforamt.economy.common.shop.TileMealShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileShopMonitor;
 import defeatedcrow.showcase.common.SCLogger;
 
@@ -68,6 +75,8 @@ public class CommonProxyEMT implements IGuiHandler {
 		// shop
 		GameRegistry.registerTileEntity(TileShopMonitor.class, "defeatedcrow.emt.shopMonitorTile");
 		GameRegistry.registerTileEntity(TileColdShop.class, "defeatedcrow.emt.coldShopTile");
+		GameRegistry.registerTileEntity(TileDisplayShop.class, "defeatedcrow.emt.cropShopTile");
+		GameRegistry.registerTileEntity(TileMealShop.class, "defeatedcrow.emt.mealShopTile");
 	}
 
 	// GUIの登録
@@ -90,6 +99,10 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new ContainerSafetyBox(player, (TileSafetyBox) tileentity);
 		} else if (tileentity instanceof OrderExchanger) {
 			return new ContainerOrderExchanger(player, (OrderExchanger) tileentity);
+		} else if (tileentity instanceof TileDisplayShop) {
+			return new ContainerShopDisp(player, (TileDisplayShop) tileentity);
+		} else if (ID == EcoMTCore.guiCatalog) {
+			return new ContainerStampCatalog(player);
 		}
 		return null;
 	}
@@ -113,6 +126,10 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new GuiSafetyBox(player, (TileSafetyBox) tileentity);
 		} else if (tileentity instanceof OrderExchanger) {
 			return new GuiOrderExchanger(player, (OrderExchanger) tileentity);
+		} else if (tileentity instanceof TileDisplayShop) {
+			return new GuiShopDisp(player, (TileDisplayShop) tileentity);
+		} else if (ID == EcoMTCore.guiCatalog) {
+			return new GuiStampCatalog(player);
 		}
 		return null;
 	}

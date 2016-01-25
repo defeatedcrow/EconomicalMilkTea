@@ -23,6 +23,7 @@ import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.api.IMPStorageBlock;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 import defeatedcrow.addonforamt.economy.api.order.IOrder;
+import defeatedcrow.addonforamt.economy.api.order.IRewardItem;
 import defeatedcrow.addonforamt.economy.api.order.OnOrderExchangeEvent;
 import defeatedcrow.addonforamt.economy.api.order.OrderType;
 import defeatedcrow.addonforamt.economy.common.block.IOpenChecker;
@@ -73,6 +74,9 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			ItemStack slot = this.getStackInSlot(i);
 			if (slot == null)
 				continue;
+			if (slot.getItem() == null || slot.getItem() instanceof IRewardItem) {
+				continue;
+			}
 			for (int j = 0; j < 4; j++) {
 				EMTLogger.debugInfo("checking! ID" + id[j]);
 				IOrder order = RecipeManagerEMT.orderRegister.getOrderFromID(id[j], OrderType.getType(j));
@@ -239,7 +243,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			// good判定
 			if (f >= 2.0F) {
 				rew *= 1.2F;// 2割増し
-				rewards.add(new ItemStack(EcoMTCore.stamp, 1, 0));
+				rewards.add(new ItemStack(EcoMTCore.stamp, type.getSlot() * 2 + 1, 0));
 			}
 
 			// まずEventをよんでおく
@@ -251,7 +255,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 				if (event.getResult() == Result.DENY)
 					return;
 				else if (event.getResult() == Result.ALLOW) {
-					rew = event.rewaedMP;
+					rew = event.rewardMP;
 					rewards = event.rewards;
 					f = event.grade;
 				}
@@ -262,13 +266,16 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			add = (add / 100) * 100;
 			this.addMP(add);
 
+			EMTLogger.debugInfo("Reward!: " + add + "MP, Bonus Item " + rewards.size());
+
 			for (ItemStack item : rewards) {
 				if (item == null || item.getItem() == null)
 					continue;
 				for (int i = 4; i < 13; i++) {
-					if (this.incrStackInSlot(i, item))
+					if (this.incrStackInSlot(i, item)) {
+						this.markDirty();
 						break;
-					else
+					} else
 						continue;
 				}
 			}
@@ -425,11 +432,10 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			return;
 		} else {
 			i -= 4;
-			this.inv[i] = stack;
-
 			if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 				stack.stackSize = this.getInventoryStackLimit();
 			}
+			this.inv[i] = stack;
 		}
 	}
 
@@ -510,15 +516,21 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			return false;
 		} else {
 			i -= 4;
-			if (i < this.getSizeInventory() && input != null && this.inv[i] != null) {
-				if (this.inv[i].getItem() == input.getItem() && this.inv[i].getItemDamage() == input.getItemDamage()) {
-					this.inv[i].stackSize += input.stackSize;
-					if (this.inv[i].stackSize > this.getInventoryStackLimit()) {
-						this.inv[i].stackSize = this.getInventoryStackLimit();
+			if (i < this.getSizeInventory() && input != null) {
+				if (this.inv[i] != null) {
+					if (this.inv[i].getItem() == input.getItem()
+							&& this.inv[i].getItemDamage() == input.getItemDamage()) {
+						int get = this.inv[i].stackSize + input.stackSize;
+						if (get <= this.getInventoryStackLimit()) {
+							this.inv[i].stackSize += input.stackSize;
+						}
+						return true;
+					} else {
+						return false;
 					}
-					return true;
 				} else {
-					return false;
+					this.setInventorySlotContents(i + 4, input);
+					return true;
 				}
 			} else {
 				this.setInventorySlotContents(i, input);

@@ -11,6 +11,7 @@ tile.defeatedcrow.emt.cold_shop.name=Cold Shop
 tile.defeatedcrow.emt.engeneer_shop.name=MOD Engeneer's Shop
 tile.defeatedcrow.emt.building_shop.name=Builder's Shop
 tile.defeatedcrow.emt.crop_shop.name=Crop Shop
+tile.defeatedcrow.emt.meal_shop.name=Meal Shop
 
 tile.defeatedcrow.emt.order_board.name=Order Board
 tile.defeatedcrow.emt.order_transaction.name=Transaction Box
@@ -29,6 +30,7 @@ item.defeatedcrow.emt.fuel_can_vegeoil.name=Vegetable Oil Can
 item.defeatedcrow.emt.bill.name=Bill
 item.defeatedcrow.emt.bill_wad.name=Half Million MP Wad
 item.defeatedcrow.emt.stamp.name=Order Stamp
+item.defeatedcrow.emt.stamp_catalog.name=Stamp Reward Catalog
 item.defeatedcrow.emt.dummy.name=No Item
 
 item.defeatedcrow.emt.emtItem.name=Economical Milk Tea Pack
@@ -38,6 +40,9 @@ item.defeatedcrow.emt.buildcard_p.name=Build Ticket(Horizonal Board)
 item.defeatedcrow.emt.buildcard_s.name=Build Ticket(Four Walls)
 item.defeatedcrow.emt.buildcard_r.name=Build Ticket(Roof Stairs)
 item.defeatedcrow.emt.buildcard_c.name=Build Ticket(Clear)
+item.defeatedcrow.emt.villagecard.name=Village Starter Ticket
+
+item.defeatedcrow.emt.staffcard.name=Shop Staff Card
 
 # GUI
 dcs.emt.distributor.gui=Distribution Board Gui

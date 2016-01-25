@@ -3,6 +3,7 @@ package defeatedcrow.addonforamt.economy.plugin.mce;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import shift.mceconomy2.api.MCEconomyAPI;
@@ -35,6 +36,10 @@ public class ColdShopList implements IShop {
 				thisProducts.addAll(AMTIntegration.getColdProductList());
 			}
 		}
+		thisProducts.add(new EMTProduct(new ItemStack(Items.beef), 300));
+		thisProducts.add(new EMTProduct(new ItemStack(Items.porkchop), 300));
+		thisProducts.add(new EMTProduct(new ItemStack(Items.chicken), 300));
+		thisProducts.add(new EMTProduct(new ItemStack(Items.fish), 200));
 	}
 
 	@Override

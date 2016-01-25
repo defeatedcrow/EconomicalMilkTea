@@ -3,33 +3,32 @@ package defeatedcrow.addonforamt.economy.common.build;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.api.BuildType;
 import defeatedcrow.addonforamt.economy.api.ISimpleBuildingItem;
 
-// board
-public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
+public class ItemVillageBuild extends Item implements ISimpleBuildingItem {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon iconNum[];
 
-	public ItemSimpleBuild() {
+	public ItemVillageBuild() {
 		super();
 		this.setMaxStackSize(1);
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
-		this.setTextureName("economical:tools/buildcard_square");
+		this.setTextureName("economical:tools/villagecard");
 	}
 
 	@Override
@@ -71,19 +70,79 @@ public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
 		int minZ = z - range;
 		int maxZ = z + range;
 		int minY = y + 1;
-		int maxY = y + range + 1;
+		int maxY = y + range * 2;
 		BlockSet set = this.getPlaceBlock(stack.getItemDamage());
 		for (int i = minX; i <= maxX; i++) {
-			for (int j = minY; j < maxY; j++) {
+			for (int j = minY; j <= maxY; j++) {
 				for (int k = minZ; k <= maxZ; k++) {
-					if (i == minX || i == maxX || k == minZ || k == maxZ) {
-						if (this.isReplaceable(world, i, j, k)) {
-							world.setBlock(i, j, k, set.block, set.meta, 3);
+					if (j == maxY) {
+						if (i == minX || i == maxX || k == minZ || k == maxZ) {
+							world.setBlock(i, j, k, Blocks.cobblestone, 0, 3);
+						} else {
+							world.setBlock(i, j, k, Blocks.planks, 0, 3);
+						}
+					} else if (j == minY) {
+						world.setBlock(i, j, k, Blocks.stone_slab, 0, 3);
+					} else {
+						if (i == minX || i == maxX || j == minY || k == minZ || k == maxZ) {
+							if (this.isReplaceable(world, i, j, k)) {
+								if ((i == minX && k == minZ) || (i == minX && k == maxZ) || (i == maxX && k == minZ)
+										|| (i == maxX && k == maxZ)) {
+									world.setBlock(i, j, k, Blocks.log, 0, 3);
+								} else {
+									world.setBlock(i, j, k, set.block, set.meta, 3);
+								}
+							}
+						} else if (i == x && j == maxY - 1 && k == z) {
+							world.setBlock(i, j, k, Blocks.glowstone, 0, 3);
+						} else {
+							world.setBlockToAir(i, j, k);
 						}
 					}
 				}
 			}
 		}
+
+		// door
+		int[] ofx = {
+				0,
+				-1,
+				0,
+				1 };
+		int[] ofz = {
+				1,
+				0,
+				-1,
+				0 };
+		for (int i = 0; i < 4; i++) {
+			if (i == dir) {
+				world.setBlockToAir(x + ofx[i] * range, y + 2, z + ofz[i] * range);
+				world.setBlockToAir(x + ofx[i] * range, y + 3, z + ofz[i] * range);
+				ItemDoor.placeDoorBlock(world, x + ofx[i] * range, y + 2, z + ofz[i] * range, dir, Blocks.wooden_door);
+			} else {
+				world.setBlock(x + ofx[i] * range, y + 3, z + ofz[i] * range, Blocks.glass);
+			}
+		}
+
+		// villager
+		if (!world.isRemote) {
+			EntityVillager vil1 = new EntityVillager(world); // 農家
+			vil1.setLocationAndAngles(x, y + 2, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F),
+					0.0F);
+			vil1.rotationYawHead = vil1.rotationYaw;
+			vil1.renderYawOffset = vil1.rotationYaw;
+			world.spawnEntityInWorld(vil1);
+			vil1.playLivingSound();
+
+			EntityVillager vil2 = new EntityVillager(world); // 農家
+			vil2.setLocationAndAngles(x, y + 2, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F),
+					0.0F);
+			vil2.rotationYawHead = vil1.rotationYaw;
+			vil2.renderYawOffset = vil1.rotationYaw;
+			world.spawnEntityInWorld(vil2);
+			vil2.playLivingSound();
+		}
+
 		return true;
 	}
 
@@ -96,37 +155,17 @@ public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
 
 	@Override
 	public int getArea(int meta) {
-		int i = meta & 7;
-		switch (i) {
-		case 0:
-			return 3;
-		case 1:
-			return 4;
-		case 2:
-			return 5;
-		case 3:
-			return 6;
-		case 4:
-			return 7;
-		case 5:
-			return 8;
-		case 6:
-			return 9;
-		case 7:
-			return 10;
-		default:
-			return 3;
-		}
+		return 3;
 	}
 
 	@Override
 	public BuildType getType(int meta) {
-		return BuildType.SQUARE;
+		return BuildType.VILLAGE;
 	}
 
 	@Override
 	public boolean forceReplace() {
-		return false;
+		return true;
 	}
 
 	protected BlockSet getPlaceBlock(int meta) {
@@ -147,7 +186,7 @@ public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
 		case 6:
 			return new BlockSet(Blocks.stone, 0);
 		case 7:
-			return new BlockSet(Blocks.cobblestone, 0);
+			return new BlockSet(Blocks.sandstone, 0);
 		default:
 			return new BlockSet(Blocks.planks, 0);
 		}
@@ -171,42 +210,5 @@ public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		par3List.add(new ItemStack(this, 1, 0));
-		par3List.add(new ItemStack(this, 1, 1));
-		par3List.add(new ItemStack(this, 1, 2));
-		par3List.add(new ItemStack(this, 1, 3));
-		par3List.add(new ItemStack(this, 1, 4));
-		par3List.add(new ItemStack(this, 1, 5));
-		par3List.add(new ItemStack(this, 1, 6));
-		par3List.add(new ItemStack(this, 1, 7));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister) {
-		super.registerIcons(par1IconRegister);
-		this.iconNum = new IIcon[8];
-
-		for (int i = 0; i < 8; i++) {
-			this.iconNum[i] = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":tools/num" + (i + 3));
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int i) {
-		return this.itemIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int dam, int pass) {
-		int i = dam & 7;
-		return pass == 1 ? this.iconNum[i] : super.getIconFromDamageForRenderPass(dam, pass);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
 	}
 }

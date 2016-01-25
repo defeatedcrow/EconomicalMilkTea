@@ -2,7 +2,6 @@ package defeatedcrow.addonforamt.economy.common.recipe;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -39,9 +38,14 @@ public class RegisterBasicRecipe {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(EcoMTCore.checker, 1, 0),
 				new Object[] { new ItemStack(EcoMTCore.checker, 1, 0) }));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(EcoMTCore.emtShop, 1, 0), new Object[] {
-				"cropTea",
-				new ItemStack(Item.getItemFromBlock(Blocks.crafting_table), 1, 0) }));
+		GameRegistry.addRecipe(new ItemStack(EcoMTCore.emtShop, 1), new Object[] {
+				" X ",
+				"XYX",
+				" X ",
+				Character.valueOf('X'),
+				new ItemStack(Items.apple, 1),
+				Character.valueOf('Y'),
+				new ItemStack(Blocks.crafting_table, 1, 0) });
 	}
 
 }

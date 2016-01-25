@@ -19,8 +19,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderColdShop;
+import defeatedcrow.addonforamt.economy.client.block.ItemRenderCropShop;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderDistributor;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderENTank;
+import defeatedcrow.addonforamt.economy.client.block.ItemRenderMealShop;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderMotor;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderSafetyBox;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderShopMonitor;
@@ -28,9 +30,11 @@ import defeatedcrow.addonforamt.economy.client.block.ItemRenderTransactionBox;
 import defeatedcrow.addonforamt.economy.client.block.RBDummy;
 import defeatedcrow.addonforamt.economy.client.block.RBOrderBoard;
 import defeatedcrow.addonforamt.economy.client.block.TESRColdShop;
+import defeatedcrow.addonforamt.economy.client.block.TESRCropShop;
 import defeatedcrow.addonforamt.economy.client.block.TESRDistributor;
 import defeatedcrow.addonforamt.economy.client.block.TESRENMotor;
 import defeatedcrow.addonforamt.economy.client.block.TESRENTank;
+import defeatedcrow.addonforamt.economy.client.block.TESRMealShop;
 import defeatedcrow.addonforamt.economy.client.block.TESRSafetyBox;
 import defeatedcrow.addonforamt.economy.client.block.TESRShopMonitor;
 import defeatedcrow.addonforamt.economy.client.block.TESRTransactionBox;
@@ -45,6 +49,8 @@ import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
 import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
 import defeatedcrow.addonforamt.economy.common.shop.TileColdShop;
+import defeatedcrow.addonforamt.economy.common.shop.TileDisplayShop;
+import defeatedcrow.addonforamt.economy.common.shop.TileMealShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileShopMonitor;
 import defeatedcrow.addonforamt.economy.event.HandleCoodTicketEvent;
 
@@ -87,8 +93,8 @@ public class ClientProxyEMT extends CommonProxyEMT {
 				new ItemRenderShopMonitor());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.buildShop),
 				new ItemRenderShopMonitor());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.cropShop),
-				new ItemRenderShopMonitor());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.cropShop), new ItemRenderCropShop());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.mealShop), new ItemRenderMealShop());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.coldShop), new ItemRenderColdShop());
 	}
 
@@ -109,6 +115,8 @@ public class ClientProxyEMT extends CommonProxyEMT {
 		ClientRegistry.registerTileEntity(TileShopMonitor.class, "defeatedcrow.emt.shopMonitorTile",
 				new TESRShopMonitor());
 		ClientRegistry.registerTileEntity(TileColdShop.class, "defeatedcrow.emt.coldShopTile", new TESRColdShop());
+		ClientRegistry.registerTileEntity(TileDisplayShop.class, "defeatedcrow.emt.cropShopTile", new TESRCropShop());
+		ClientRegistry.registerTileEntity(TileMealShop.class, "defeatedcrow.emt.mealShopTile", new TESRMealShop());
 	}
 
 	@Override

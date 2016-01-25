@@ -11,6 +11,7 @@ tile.defeatedcrow.emt.cold_shop.name=コールドショップ
 tile.defeatedcrow.emt.engeneer_shop.name=工業用品ショップ
 tile.defeatedcrow.emt.building_shop.name=建設チケットショップ
 tile.defeatedcrow.emt.crop_shop.name=作物ショップ
+tile.defeatedcrow.emt.meal_shop.name=食材ショップ
 
 tile.defeatedcrow.emt.order_board.name=オーダー掲示板
 tile.defeatedcrow.emt.order_transaction.name=取引ボックス
@@ -29,6 +30,7 @@ item.defeatedcrow.emt.fuel_can_vegeoil.name=植物油缶
 item.defeatedcrow.emt.bill.name=一万円札
 item.defeatedcrow.emt.bill_wad.name=五十万円札束
 item.defeatedcrow.emt.stamp.name=オーダー達成スタンプ
+item.defeatedcrow.emt.stamp_catalog.name=スタンプギフトカタログ
 item.defeatedcrow.emt.dummy.name=該当アイテム無し
 
 item.defeatedcrow.emt.emtItem.name=お徳用ミルクティーパック
@@ -38,6 +40,9 @@ item.defeatedcrow.emt.buildcard_p.name=建築チケット(床面ボード)
 item.defeatedcrow.emt.buildcard_s.name=建築チケット(四面壁)
 item.defeatedcrow.emt.buildcard_r.name=建築チケット(屋根階段)
 item.defeatedcrow.emt.buildcard_c.name=建築チケット(消去)
+item.defeatedcrow.emt.villagecard.name=村スターターチケット
+
+item.defeatedcrow.emt.staffcard.name=社員証
 
 # gui
 dcs.energy.distributor.gui=分電盤

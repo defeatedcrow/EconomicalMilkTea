@@ -22,10 +22,15 @@ public class OrderShopList implements IShop {
 
 	void registerProducts() {
 		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.questBlock, 1, 0), 3000));
-		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.questKanban, 1, 0), 1000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.questKanban, 1, 0), 2000));
 		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.safetyBox, 1, 0), 20000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.giftCatalog, 1, 0), 2000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.staffCard, 1, 0), 1000));
 		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.emtShop, 1, 0), 5000));
 		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.energyShop, 1, 0), 5000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.coldShop, 1, 0), 5000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.cropShop, 1, 0), 5000));
+		thisProducts.add(new EMTProduct(new ItemStack(EcoMTCore.mealShop, 1, 0), 5000));
 	}
 
 	@Override

@@ -10,19 +10,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
-import defeatedcrow.addonforamt.economy.plugin.mce.CropShopList;
+import defeatedcrow.addonforamt.economy.plugin.mce.MealShopList;
 
-public class BlockCropShop extends ShopBlockBase {
+public class BlockMealShop extends ShopBlockBase {
 
 	protected Random rand = new Random();
 
-	public BlockCropShop() {
+	public BlockMealShop() {
 		super();
 	}
 
 	@Override
 	protected int getShopID() {
-		return CropShopList.thisShopId;
+		return MealShopList.thisShopId;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class BlockCropShop extends ShopBlockBase {
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		return new TileDisplayShop();
+		return new TileMealShop();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BlockCropShop extends ShopBlockBase {
 
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
-		TileDisplayShop tileentity = (TileDisplayShop) par1World.getTileEntity(par2, par3, par4);
+		TileMealShop tileentity = (TileMealShop) par1World.getTileEntity(par2, par3, par4);
 
 		if (tileentity != null) {
 			// ItemStack block = new ItemStack(this, 1, 0);
@@ -113,4 +113,5 @@ public class BlockCropShop extends ShopBlockBase {
 
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
+
 }
