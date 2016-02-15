@@ -16,6 +16,7 @@ tile.defeatedcrow.emt.meal_shop.name=Meal Shop
 tile.defeatedcrow.emt.order_board.name=Order Board
 tile.defeatedcrow.emt.order_transaction.name=Transaction Box
 tile.defeatedcrow.emt.safety.name=Cash Box
+tile.defeatedcrow.emt.safety_chest.name=Private Chest
 
 # Items
 item.defeatedcrow.emt.en_ticket_8_4.name=Monthly Ticket(8CA/t x 4slot)
@@ -51,6 +52,9 @@ dcs.emt.tankInv.gui=Yuzu Energy Tank Gui
 dcs.emt.generatorInv.gui=Diesel Yuzu Generator Gui
 dcs.emt.transaction.gui=Transaction Box Gui
 dcs.emt.safety.gui=Cash Box Gui
+dcs.emt.safety_chest.gui=Private Chest Gui
+dcs.emt.cropshop.gui=Crop Shop Display
+dcs.emt.mealsyop.gui=Meal Shop Display
 
 dcs.emt.order.word1=Remaining 
 dcs.emt.order.word2= Day

@@ -26,10 +26,9 @@ import defeatedcrow.addonforamt.economy.api.order.IOrder;
 import defeatedcrow.addonforamt.economy.api.order.IRewardItem;
 import defeatedcrow.addonforamt.economy.api.order.OnOrderExchangeEvent;
 import defeatedcrow.addonforamt.economy.api.order.OrderType;
-import defeatedcrow.addonforamt.economy.common.block.IOpenChecker;
 import defeatedcrow.addonforamt.economy.plugin.mce.MPHandler;
 
-public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IOpenChecker {
+public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 
 	protected long longMP = 0L;
 	protected long maxStorage = 99999900L;
@@ -40,7 +39,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 	private int coolTime = 20;
 
 	public boolean isOpen = false;
-	private boolean lastOpen = false;
+	private int lastOpen = 0;
 	private int openCount = 0;
 
 	public int[] keep = {
@@ -61,9 +60,28 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 	}
 
 	private void onServerUpdate() {
+		boolean b = false;
 		if (lastMP != longMP) {
 			lastMP = longMP;
+			b = true;
+		}
+
+		if (lastOpen != openCount) {
+			if (lastOpen > 0 && openCount == 0) {
+				worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "tile.piston.in", 0.5F,
+						worldObj.rand.nextFloat() * 0.15F + 1.2F);
+			} else if (lastOpen == 0 && openCount > 0) {
+				worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "tile.piston.in", 0.5F,
+						worldObj.rand.nextFloat() * 0.15F + 1.2F);
+			}
+			lastOpen = openCount;
+			b = true;
+		}
+
+		if (b) {
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
+			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
 		}
 	}
 
@@ -122,70 +140,72 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 		}
 
 		// 周囲のインベントリ検知
-		List<ItemStack> list = new ArrayList<ItemStack>();
-		for (int j = 0; j < 4; j++) {
-			IOrder order = RecipeManagerEMT.orderRegister.getOrderFromID(id[j], OrderType.getType(j));
-			if (order == null)
-				continue;
-			Object check = order.getRequest();
-			if (check == null)
-				continue;
-			if (check instanceof ItemStack) {
-				ItemStack target = (ItemStack) check;
-				list.add(target);
-			} else if (check instanceof String) {
-				String ore = (String) check;
-				List<ItemStack> ores = OreDictionary.getOres(ore);
-				if (ores != null && !ores.isEmpty()) {
-					list.addAll(ores);
+		if (coolTime > 0) {
+			coolTime--;
+		} else {
+			coolTime = 20;
+			for (int j = 0; j < 4; j++) {
+				List<ItemStack> list = new ArrayList<ItemStack>();
+				IOrder order = RecipeManagerEMT.orderRegister.getOrderFromID(id[j], OrderType.getType(j));
+				if (order == null)
+					continue;
+				Object check = order.getRequest();
+				if (check == null)
+					continue;
+				if (check instanceof ItemStack) {
+					ItemStack target = (ItemStack) check;
+					list.add(target);
+				} else if (check instanceof String) {
+					String ore = (String) check;
+					List<ItemStack> ores = OreDictionary.getOres(ore);
+					if (ores != null && !ores.isEmpty()) {
+						list.addAll(ores);
+					}
 				}
-			}
 
-			if (coolTime > 0) {
-				coolTime--;
-			} else if (!list.isEmpty()) {
-				coolTime = 20;
-				for (int ix = -1; ix <= 1; ix++) {
-					for (int iz = -1; iz <= 1; iz++) {
-						if (ix == 0 && iz == 0)
-							continue;
-						TileEntity tile = worldObj.getTileEntity(xCoord + ix, yCoord, zCoord + iz);
-						if (tile != null && tile instanceof IInventory) {
-							IInventory targetInv = (IInventory) tile;
-							if (targetInv instanceof ISidedInventory) {
-								int[] slots = ((ISidedInventory) targetInv).getAccessibleSlotsFromSide(0);
-								for (int l : slots) {
-									ItemStack slot = targetInv.getStackInSlot(l);
-									if (slot == null)
-										continue;
-									for (ItemStack target : list) {
-										if (slot.getItem() == target.getItem()
-												&& (slot.getItemDamage() == target.getItemDamage() || target
-														.getItemDamage() == 32767)) {
-											int red = slot.stackSize;
-											keep[j] += red;
-											targetInv.decrStackSize(l, red);
-											this.markDirty();
-											b = true;
-											break;
+				if (!list.isEmpty()) {
+					for (int ix = -1; ix <= 1; ix++) {
+						for (int iz = -1; iz <= 1; iz++) {
+							if (ix == 0 && iz == 0)
+								continue;
+							TileEntity tile = worldObj.getTileEntity(xCoord + ix, yCoord, zCoord + iz);
+							if (tile != null && tile instanceof IInventory) {
+								IInventory targetInv = (IInventory) tile;
+								if (targetInv instanceof ISidedInventory) {
+									int[] slots = ((ISidedInventory) targetInv).getAccessibleSlotsFromSide(0);
+									for (int l : slots) {
+										ItemStack slot = targetInv.getStackInSlot(l);
+										if (slot == null)
+											continue;
+										for (ItemStack target : list) {
+											if (slot.getItem() == target.getItem()
+													&& (slot.getItemDamage() == target.getItemDamage() || target
+															.getItemDamage() == 32767)) {
+												int red = slot.stackSize;
+												keep[j] += red;
+												targetInv.decrStackSize(l, red);
+												this.markDirty();
+												b = true;
+												break;
+											}
 										}
 									}
-								}
-							} else {
-								for (int l = 0; l < targetInv.getSizeInventory(); l++) {
-									ItemStack slot = targetInv.getStackInSlot(l);
-									if (slot == null)
-										continue;
-									for (ItemStack target : list) {
-										if (slot.getItem() == target.getItem()
-												&& (slot.getItemDamage() == target.getItemDamage() || target
-														.getItemDamage() == 32767)) {
-											int red = slot.stackSize;
-											keep[j] += red;
-											targetInv.decrStackSize(l, red);
-											this.markDirty();
-											b = true;
-											break;
+								} else {
+									for (int l = 0; l < targetInv.getSizeInventory(); l++) {
+										ItemStack slot = targetInv.getStackInSlot(l);
+										if (slot == null)
+											continue;
+										for (ItemStack target : list) {
+											if (slot.getItem() == target.getItem()
+													&& (slot.getItemDamage() == target.getItemDamage() || target
+															.getItemDamage() == 32767)) {
+												int red = slot.stackSize;
+												keep[j] += red;
+												targetInv.decrStackSize(l, red);
+												this.markDirty();
+												b = true;
+												break;
+											}
 										}
 									}
 								}
@@ -193,27 +213,8 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 						}
 					}
 				}
+				list.clear();
 			}
-		}
-
-		if (lastOpen != isOpen) {
-			if (isOpen && openCount == 0) {
-				openCount = 20;
-			}
-			lastOpen = isOpen;
-			b = true;
-			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
-		}
-
-		if (openCount > 0) {
-			openCount--;
-		} else {
-			isOpen = false;
-		}
-
-		if (b) {
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -241,9 +242,16 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 			List<ItemStack> rewards = new ArrayList<ItemStack>(); // 追加報酬
 
 			// good判定
+			// stamp個数
+			int[] num = {
+					1,
+					4,
+					15,
+					60,
+					60 };
 			if (f >= 2.0F) {
 				rew *= 1.2F;// 2割増し
-				rewards.add(new ItemStack(EcoMTCore.stamp, type.getSlot() * 2 + 1, 0));
+				rewards.add(new ItemStack(EcoMTCore.stamp, num[type.getSlot()], 0));
 			}
 
 			// まずEventをよんでおく
@@ -303,7 +311,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 		this.owner = tag.getString("Owner");
 		this.ownerID = tag.getString("OwnerID");
 		this.mode = tag.getByte("Mode");
-		this.isOpen = tag.getBoolean("Open");
+		this.openCount = tag.getShort("Opener");
 
 		for (int j = 0; j < 4; j++) {
 			this.keep[j] = tag.getInteger("Keep_" + j);
@@ -319,7 +327,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 		tag.setString("Owner", this.owner);
 		tag.setString("OwnerID", this.ownerID);
 		tag.setByte("Mode", (byte) this.mode);
-		tag.setBoolean("Open", this.isOpen);
+		tag.setShort("Opener", (short) this.openCount);
 
 		for (int j = 0; j < 4; j++) {
 			tag.setInteger("Keep_" + j, this.keep[j]);
@@ -471,10 +479,24 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 
 	@Override
 	public void openInventory() {
+		if (!worldObj.isRemote) {
+			EMTLogger.debugInfo("on opening!");
+			if (openCount < 0)
+				openCount = 0;
+			openCount++;
+			if (openCount > 127)
+				openCount = 127;
+		}
 	}
 
 	@Override
 	public void closeInventory() {
+		if (!worldObj.isRemote) {
+			EMTLogger.debugInfo("on closing!");
+			openCount--;
+			if (openCount < 0)
+				openCount = 0;
+		}
 	}
 
 	@Override
@@ -688,16 +710,16 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock, IO
 
 	/* OpenChecker */
 
-	@Override
 	public boolean isOpen() {
-		return this.isOpen;
+		return openCount > 0;
 	}
 
-	@Override
-	public void setOpen(boolean b) {
-		this.isOpen = b;
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
+	public void setOpenNum(int i) {
+		openCount = i;
+	}
+
+	public int getOpenNum() {
+		return openCount;
 	}
 
 }

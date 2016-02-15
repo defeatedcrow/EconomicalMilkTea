@@ -25,6 +25,7 @@ import defeatedcrow.addonforamt.economy.common.item.ItemStamp;
 import defeatedcrow.addonforamt.economy.common.quest.BlockOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.BlockOrderExchanger;
 import defeatedcrow.addonforamt.economy.common.quest.BlockSafetyBox;
+import defeatedcrow.addonforamt.economy.common.quest.BlockSafetyChest;
 import defeatedcrow.addonforamt.economy.common.quest.ItemSafetyBox;
 import defeatedcrow.addonforamt.economy.common.shop.BlockBuilderShop;
 import defeatedcrow.addonforamt.economy.common.shop.BlockColdShop;
@@ -59,6 +60,7 @@ public class MaterialEMT {
 		GameRegistry.registerBlock(EcoMTCore.questKanban, "defeatedcrow.emt.order_board");
 		GameRegistry.registerBlock(EcoMTCore.questBlock, ItemSafetyBox.class, "defeatedcrow.emt.order_transaction");
 		GameRegistry.registerBlock(EcoMTCore.safetyBox, ItemSafetyBox.class, "defeatedcrow.emt.safety");
+		GameRegistry.registerBlock(EcoMTCore.safetyChest, ItemSafetyBox.class, "defeatedcrow.emt.safety_chest");
 
 		GameRegistry.registerItem(EcoMTCore.yukiti, "defeatedcrow.emt.bill");
 		GameRegistry.registerItem(EcoMTCore.ticket, "defeatedcrow.emt.en_ticket");
@@ -122,6 +124,9 @@ public class MaterialEMT {
 				.setCreativeTab(EcoMTCore.economy);
 
 		EcoMTCore.safetyBox = (new BlockSafetyBox()).setBlockName("defeatedcrow.emt.safety").setCreativeTab(
+				EcoMTCore.economy);
+
+		EcoMTCore.safetyChest = (new BlockSafetyChest()).setBlockName("defeatedcrow.emt.safety_chest").setCreativeTab(
 				EcoMTCore.economy);
 	}
 

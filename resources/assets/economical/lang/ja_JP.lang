@@ -16,6 +16,7 @@ tile.defeatedcrow.emt.meal_shop.name=食材ショップ
 tile.defeatedcrow.emt.order_board.name=オーダー掲示板
 tile.defeatedcrow.emt.order_transaction.name=取引ボックス
 tile.defeatedcrow.emt.safety.name=手提げ金庫
+tile.defeatedcrow.emt.safety_chest.name=個人チェスト
 
 # Items
 item.defeatedcrow.emt.en_ticket_8_4.name=月額チケット(8CA/t x 4slot)
@@ -51,6 +52,9 @@ dcs.energy.tankInv.gui=柚子エネルギータンク
 dcs.energy.generatorInv.gui=ディーゼル柚子発電機
 dcs.emt.transaction.gui=取引ボックス
 dcs.emt.safety.gui=手提げ金庫
+dcs.emt.safety_chest.gui=個人チェスト
+dcs.emt.cropshop.gui=作物ショップディスプレイ
+dcs.emt.mealsyop.gui=食材ショップディスプレイ
 
 dcs.emt.order.word1=あと
 dcs.emt.order.word2= 日
@@ -170,7 +174,7 @@ dcs.emt.ordername.middle_ss2_cucumber=キュウリを収穫しよう!
 dcs.emt.ordername.middle_ss2_corn=夏の野菜
 dcs.emt.ordername.middle_ss2_onion=スタミナのつく野菜
 dcs.emt.ordername.middle_ss2_eggp=秋なす収穫
-dcs.emt.ordername.middle_ss2_greenp=ピーマン募集中
+dcs.emt.ordername.middle_ss2_greenp=SS2産ピーマン募集中
 dcs.emt.ordername.middle_ss2_radish=鍋料理の材料
 dcs.emt.ordername.middle_ss2_leaves=冬の落ち葉焚き
 

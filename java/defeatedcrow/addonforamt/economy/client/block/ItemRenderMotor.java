@@ -8,8 +8,11 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 
+@SideOnly(Side.CLIENT)
 public class ItemRenderMotor implements IItemRenderer {
 
 	private static final ResourceLocation resource = new ResourceLocation(EcoMTCore.PACKAGE
@@ -86,10 +89,10 @@ public class ItemRenderMotor implements IItemRenderer {
 	 * 装備状態での描画位置の調整.
 	 */
 	private void glMatrixForRenderInEquipped() {
-		GL11.glRotatef(-210F, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(-240F, 1.0F, 0.0F, 0.0F);
 		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-		GL11.glScalef(0.8F, 0.8F, 0.8F);
-		GL11.glTranslatef(0.5F, -1.2F, -0.5F);
+		GL11.glScalef(0.6F, 0.6F, 0.6F);
+		GL11.glTranslatef(1.0F, -1.2F, -0.5F);
 	}
 
 	/*

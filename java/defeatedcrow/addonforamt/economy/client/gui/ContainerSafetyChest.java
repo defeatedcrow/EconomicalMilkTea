@@ -7,39 +7,36 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
+import defeatedcrow.addonforamt.economy.common.quest.TileSafetyChest;
 
-public class ContainerOrderExchanger extends Container {
+public class ContainerSafetyChest extends Container {
 
-	private OrderExchanger tileentity;
+	private TileSafetyChest tileentity;
 	private int lastCookTime;
 	private int lastBurnTime;
 
-	public ContainerOrderExchanger(EntityPlayer player, OrderExchanger t) {
-		this.tileentity = t;
+	public ContainerSafetyChest(EntityPlayer player, TileSafetyChest tile) {
+		this.tileentity = tile;
 		tileentity.openInventory();
-
-		this.addSlotToContainer(new SlotDisplay(this.tileentity, 0, 7 + 12, 17));
-		this.addSlotToContainer(new SlotDisplay(this.tileentity, 1, 7 + 52, 17));
-		this.addSlotToContainer(new SlotDisplay(this.tileentity, 2, 7 + 92, 17));
-		this.addSlotToContainer(new SlotDisplay(this.tileentity, 3, 7 + 132, 17));
 
 		int i;
 
-		for (int h = 0; h < 9; ++h) {
-			this.addSlotToContainer(new Slot(tileentity, h + 4, 8 + h * 18, 66));
+		for (i = 0; i < 6; ++i) {
+			for (int h = 0; h < 9; ++h) {
+				this.addSlotToContainer(new Slot(tileentity, h + i * 9, 8 + h * 18, 18 + i * 18));
+			}
 		}
 
 		// 1 ～ 3段目のインベントリ
 		for (i = 0; i < 3; ++i) {
 			for (int h = 0; h < 9; ++h) {
-				this.addSlotToContainer(new Slot(player.inventory, h + i * 9 + 9, 8 + h * 18, 118 + i * 18));
+				this.addSlotToContainer(new Slot(player.inventory, h + i * 9 + 9, 8 + h * 18, 140 + i * 18));
 			}
 		}
 
 		// 4段目のインベントリ
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 176));
+			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 198));
 		}
 	}
 
@@ -71,26 +68,28 @@ public class ContainerOrderExchanger extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-		int sLim = 49;
+		int sLim = 90;
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			// カーソルをプレイヤーのインベントリにあわせている
-			if (par2 > 12 && tileentity.isItemValidForSlot(par2, itemstack1)) {
-				if (!this.mergeItemStack(itemstack1, 4, 13, false))
-					return null;
-			} else if (par2 > 4) {
-				// カーソルを貯金箱のスロットにあわせているとき
+			// カーソルを貯金箱のスロットにあわせているとき
+			if (par2 < 54) {
 				// プレイヤーインベントリへ
-				if (!this.mergeItemStack(itemstack1, 27, sLim, true))
+				if (!this.mergeItemStack(itemstack1, 54, sLim, true))
 					return null;
 
 				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				return null;
 			}
+			// カーソルをプレイヤーのインベントリにあわせている
+			else if (tileentity.isItemValidForSlot(par2, itemstack1)) {
+				if (!this.mergeItemStack(itemstack1, 0, 53, false))
+					return null;
+			}
+			// アイテムの移動
+			else if (!this.mergeItemStack(itemstack1, 54, sLim, false))
+				return null;
 
 			if (itemstack1.stackSize == 0) {
 				slot.putStack((ItemStack) null);

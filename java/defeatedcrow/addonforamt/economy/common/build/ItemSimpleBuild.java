@@ -90,8 +90,12 @@ public class ItemSimpleBuild extends Item implements ISimpleBuildingItem {
 	@Override
 	public boolean isReplaceable(World world, int x, int y, int z) {
 		Block block = world.getBlock(x, y, z);
-		return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z)
-				|| block.canReplace(world, x, y, z, 1, new ItemStack(Blocks.cobblestone)) || this.forceReplace();
+		if (this.forceReplace()) {
+			return EcoMTCore.arrowClearBedrock ? true : block.getBlockHardness(world, x, y, z) >= 0;
+		} else {
+			return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z)
+					|| block.canReplace(world, x, y, z, 1, new ItemStack(Blocks.cobblestone));
+		}
 	}
 
 	@Override

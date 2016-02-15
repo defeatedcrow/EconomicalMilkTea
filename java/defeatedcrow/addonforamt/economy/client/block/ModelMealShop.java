@@ -27,13 +27,13 @@ public class ModelMealShop extends ModelBase {
 		Plate1.setTextureSize(64, 64);
 		Plate1.mirror = true;
 		setRotation(Plate1, 0F, 0F, 0F);
-		Plate2 = new ModelRenderer(this, 0, 32);
+		Plate2 = new ModelRenderer(this, 0, 34);
 		Plate2.addBox(-8F, 6F, -3.5F, 16, 1, 10);
 		Plate2.setRotationPoint(0F, 16F, 0F);
 		Plate2.setTextureSize(64, 64);
 		Plate2.mirror = true;
 		setRotation(Plate2, 0.1047198F, 0F, 0F);
-		Plate3 = new ModelRenderer(this, 0, 32);
+		Plate3 = new ModelRenderer(this, 0, 34);
 		Plate3.addBox(-8F, -1F, -3F, 16, 1, 10);
 		Plate3.setRotationPoint(0F, 16F, 0F);
 		Plate3.setTextureSize(64, 64);

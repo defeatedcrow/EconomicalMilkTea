@@ -75,13 +75,13 @@ public class ItemVillageBuild extends Item implements ISimpleBuildingItem {
 		for (int i = minX; i <= maxX; i++) {
 			for (int j = minY; j <= maxY; j++) {
 				for (int k = minZ; k <= maxZ; k++) {
-					if (j == maxY) {
+					if (j == minY) {
 						if (i == minX || i == maxX || k == minZ || k == maxZ) {
 							world.setBlock(i, j, k, Blocks.cobblestone, 0, 3);
 						} else {
 							world.setBlock(i, j, k, Blocks.planks, 0, 3);
 						}
-					} else if (j == minY) {
+					} else if (j == maxY) {
 						world.setBlock(i, j, k, Blocks.stone_slab, 0, 3);
 					} else {
 						if (i == minX || i == maxX || j == minY || k == minZ || k == maxZ) {
@@ -126,7 +126,8 @@ public class ItemVillageBuild extends Item implements ISimpleBuildingItem {
 
 		// villager
 		if (!world.isRemote) {
-			EntityVillager vil1 = new EntityVillager(world); // 農家
+			int id = world.rand.nextInt(5);
+			EntityVillager vil1 = new EntityVillager(world, id); // ランダム
 			vil1.setLocationAndAngles(x, y + 2, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F),
 					0.0F);
 			vil1.rotationYawHead = vil1.rotationYaw;

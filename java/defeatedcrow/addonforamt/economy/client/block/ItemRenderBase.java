@@ -1,5 +1,6 @@
 package defeatedcrow.addonforamt.economy.client.block;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -8,13 +9,28 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 
-public class ItemRenderTransactionBox implements IItemRenderer {
+@SideOnly(Side.CLIENT)
+public class ItemRenderBase implements IItemRenderer {
 
-	private static final ResourceLocation resource = new ResourceLocation(EcoMTCore.PACKAGE
-			+ ":textures/blocks/tileentity/transactionbox.png");
-	private ModelTransactionBox model = new ModelTransactionBox();
+	private final String texpass;
+	private final ModelBase model;
+
+	public ItemRenderBase(ModelBase m, String pass) {
+		model = m;
+		texpass = pass;
+	}
+
+	protected String getPass() {
+		return texpass == null ? "" : texpass;
+	}
+
+	private ResourceLocation getResource() {
+		return new ResourceLocation(EcoMTCore.PACKAGE + getPass());
+	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -65,11 +81,15 @@ public class ItemRenderTransactionBox implements IItemRenderer {
 				break;
 			}
 
-			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(resource);
-			model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(getResource());
+			renderModel(model);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glPopMatrix();
 		}
+	}
+
+	protected void renderModel(ModelBase model) {
+		model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 	}
 
 	/*
@@ -84,11 +104,11 @@ public class ItemRenderTransactionBox implements IItemRenderer {
 	 * 装備状態での描画位置の調整.
 	 */
 	private void glMatrixForRenderInEquipped() {
-		GL11.glRotatef(-210F, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(-240F, 1.0F, 0.0F, 0.0F);
 		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
 		GL11.glRotatef(-0F, 0.0F, 1.0F, 0.0F);
-		GL11.glScalef(0.8F, 0.8F, 0.8F);
-		GL11.glTranslatef(0.3F, -1.2F, 0.0F);
+		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		GL11.glTranslatef(1.0F, -1.2F, -0.5F);
 	}
 
 	/*

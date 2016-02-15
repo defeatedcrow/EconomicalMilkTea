@@ -77,7 +77,6 @@ public class BlockOrderExchanger extends BlockContainer {
 			if (world.isRemote) {
 				return true;
 			} else {
-				tile.setOpen(true);
 				player.openGui(EcoMTCore.instance, EcoMTCore.instance.guiOrder, world, x, y, z);
 				return true;
 			}

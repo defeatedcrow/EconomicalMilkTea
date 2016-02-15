@@ -12,19 +12,17 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
-import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
+import defeatedcrow.addonforamt.economy.common.quest.TileSafetyChest;
 
 @SideOnly(Side.CLIENT)
-public class TESRTransactionBox extends TileEntitySpecialRenderer {
+public class TESRSafetyChest extends TileEntitySpecialRenderer {
 
 	private static final ResourceLocation tex = new ResourceLocation(EcoMTCore.PACKAGE
-			+ ":textures/blocks/tileentity/transactionbox.png");
-	private static final ResourceLocation alttex = new ResourceLocation(EcoMTCore.PACKAGE
-			+ ":textures/blocks/tileentity/transactionbox_alt.png");
-	public static TESRTransactionBox renderer;
-	private ModelTransactionBox model = new ModelTransactionBox();
+			+ ":textures/blocks/tileentity/safetychest.png");
+	public static TESRSafetyChest renderer;
+	private ModelSafetyChest model = new ModelSafetyChest();
 
-	public void renderTileEntitySteakAt(OrderExchanger par1Tile, double par2, double par4, double par6, float par8) {
+	public void renderTileEntitySteakAt(TileSafetyChest par1Tile, double par2, double par4, double par6, float par8) {
 		this.setRotation(par1Tile, (float) par2, (float) par4, (float) par6);
 	}
 
@@ -33,8 +31,8 @@ public class TESRTransactionBox extends TileEntitySpecialRenderer {
 		renderer = this;
 	}
 
-	public void setRotation(OrderExchanger tile, float par1, float par2, float par3) {
-		byte m = (byte) tile.getBlockMetadata();
+	public void setRotation(TileSafetyChest par0Tile, float par1, float par2, float par3) {
+		byte m = (byte) par0Tile.getBlockMetadata();
 		byte l = (byte) (m & 3);
 		float j = 0;
 		if (l == 0)
@@ -46,13 +44,9 @@ public class TESRTransactionBox extends TileEntitySpecialRenderer {
 		if (l == 3)
 			j = 90.0F;
 
-		boolean alt = (m & 4) != 0;
+		boolean alt = par0Tile.getOpenNum() > 0;
 
-		if (EcoMTCore.useAltTex) {
-			this.bindTexture(alttex);
-		} else {
-			this.bindTexture(tex);
-		}
+		this.bindTexture(tex);
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -60,7 +54,7 @@ public class TESRTransactionBox extends TileEntitySpecialRenderer {
 		GL11.glTranslatef(par1 + 0.5F, par2 + 1.5F, par3 + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 		GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
-		model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, alt);
 
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
@@ -68,6 +62,6 @@ public class TESRTransactionBox extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8) {
-		this.renderTileEntitySteakAt((OrderExchanger) par1TileEntity, par2, par4, par6, par8);
+		this.renderTileEntitySteakAt((TileSafetyChest) par1TileEntity, par2, par4, par6, par8);
 	}
 }

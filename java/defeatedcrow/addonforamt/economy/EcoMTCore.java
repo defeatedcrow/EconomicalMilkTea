@@ -11,7 +11,8 @@ package defeatedcrow.addonforamt.economy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,7 +23,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
-import defeatedcrow.addonforamt.economy.client.RenderBuildCardEvent;
 import defeatedcrow.addonforamt.economy.common.CommonProxyEMT;
 import defeatedcrow.addonforamt.economy.common.quest.OrderPool;
 import defeatedcrow.addonforamt.economy.common.quest.OrderRegister;
@@ -39,8 +39,8 @@ import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_1.0a",
-		dependencies = "required-after:Forge@[10.13.0.1448,);required-after:mceconomy2@[2.5,)")
+		version = "1.7.10_1.1a",
+		dependencies = "required-after:Forge@[10.13.4.1448,);required-after:mceconomy2@[2.5,);after:DCsAppleMilk@[1.7.10_2.9a,)")
 public class EcoMTCore {
 
 	@SidedProxy(
@@ -70,6 +70,7 @@ public class EcoMTCore {
 
 	public static Block exchanger; // 両替
 	public static Block safetyBox; // 金庫
+	public static Block safetyChest; // Item金庫
 
 	public static Block emtShop; // ショップ系備品はここ
 	public static Block energyShop; // CE系機械類
@@ -79,6 +80,8 @@ public class EcoMTCore {
 	public static Block cropShop; // 野菜
 	public static Block mealShop; // その他食べ物
 	public static Block buildShop; // BuildTicket専門店
+
+	public static Block sfattDoor; // staff専用ドア
 
 	// item
 	public static Item yukiti; // 一万円札
@@ -118,11 +121,35 @@ public class EcoMTCore {
 	public static int guiOrder = 6;
 	public static int guiShop = 7;
 	public static int guiCatalog = 8;
+	public static int guiSChest = 9;
+
+	// config
+	public static boolean arrowClearBedrock = false;
+	public static boolean useAltTex = false;
+	private final String BR = System.getProperty("line.separator");
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		RecipeManagerEMT.fuelRegister = new FuelFluidRegister();
 		RecipeManagerEMT.orderRegister = new OrderPool();
+
+		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
+		try {
+			cfg.load();
+
+			Property bedrock = cfg.get("Setting", "ArrowClearBedrock", arrowClearBedrock,
+					"Arrow clear bedrocks by build ticket.");
+			arrowClearBedrock = bedrock.getBoolean();
+
+			Property alttex = cfg.get("Setting", "UseAnotherTexture", useAltTex,
+					"Use Another texture for Meal Shop and Transaction Box.");
+			useAltTex = alttex.getBoolean();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cfg.save();
+		}
 
 		MaterialEMT.init();
 
@@ -147,7 +174,6 @@ public class EcoMTCore {
 
 		EMTPacketHandler.init();
 
-		MinecraftForge.EVENT_BUS.register(new RenderBuildCardEvent());
 	}
 
 	@EventHandler
@@ -164,7 +190,7 @@ public class EcoMTCore {
 	}
 
 	public int getMinorVersion() {
-		return 0;
+		return 1;
 	}
 
 	public String getRivision() {

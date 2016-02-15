@@ -13,27 +13,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
 
-public class BlockSafetyBox extends BlockContainer {
+public class BlockSafetyChest extends BlockContainer {
 
 	protected Random rand = new Random();
 
-	@SideOnly(Side.CLIENT)
-	private IIcon texT;
-	@SideOnly(Side.CLIENT)
-	private IIcon texB;
-	@SideOnly(Side.CLIENT)
-	private IIcon texF;
-	@SideOnly(Side.CLIENT)
-	private IIcon texS;
-
-	public BlockSafetyBox() {
+	public BlockSafetyChest() {
 		super(Material.anvil);
 		this.setStepSound(Block.soundTypeAnvil);
 		this.setHardness(1.0F);
@@ -47,15 +37,15 @@ public class BlockSafetyBox extends BlockContainer {
 
 		ItemStack item = player.inventory.getCurrentItem();
 		TileEntity tileentity = world.getTileEntity(x, y, z);
-		TileSafetyBox tile = null;
-		if (tileentity != null && tileentity instanceof TileSafetyBox) {
-			tile = (TileSafetyBox) tileentity;
+		TileSafetyChest tile = null;
+		if (tileentity != null && tileentity instanceof TileSafetyChest) {
+			tile = (TileSafetyChest) tileentity;
 		}
-		if (tile != null && tile.canHandleMP(player)) {
+		if (tile != null && tile.canHandleChest(player)) {
 			if (world.isRemote) {
 				return true;
 			} else {
-				player.openGui(EcoMTCore.instance, EcoMTCore.instance.guiSafety, world, x, y, z);
+				player.openGui(EcoMTCore.instance, EcoMTCore.instance.guiSChest, world, x, y, z);
 				return true;
 			}
 
@@ -69,10 +59,10 @@ public class BlockSafetyBox extends BlockContainer {
 			return;
 		TileEntity tile = world.getTileEntity(x, y, z);
 		int meta = world.getBlockMetadata(x, y, z);
-		TileSafetyBox safe = null;
-		if (tile != null && tile instanceof TileSafetyBox) {
-			safe = (TileSafetyBox) tile;
-			if (safe.canHandleMP(player)) {
+		TileSafetyChest safe = null;
+		if (tile != null && tile instanceof TileSafetyChest) {
+			safe = (TileSafetyChest) tile;
+			if (safe.canHandleChest(player)) {
 				world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "random.pop", 0.5F,
 						this.rand.nextFloat() * 0.15F + 1.2F);
 				world.setBlockToAir(x, y, z);
@@ -83,9 +73,9 @@ public class BlockSafetyBox extends BlockContainer {
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
 		TileEntity tile = par1World.getTileEntity(par2, par3, par4);
-		TileSafetyBox tileentity = null;
-		if (tile != null && tile instanceof TileSafetyBox) {
-			tileentity = (TileSafetyBox) tile;
+		TileSafetyChest tileentity = null;
+		if (tile != null && tile instanceof TileSafetyChest) {
+			tileentity = (TileSafetyChest) tile;
 		}
 
 		if (tileentity != null) {
@@ -131,30 +121,6 @@ public class BlockSafetyBox extends BlockContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		int i = par2;
-		if (i > 4)
-			i = 4;
-		switch (par1) {
-		case 0:
-			return texB;
-		case 1:
-			return texT;
-		case 2:
-			return i == 0 ? texF : texS;
-		case 3:
-			return i == 2 ? texF : texS;
-		case 4:
-			return i == 3 ? texF : texS;
-		case 5:
-			return i == 1 ? texF : texS;
-		default:
-			return this.texF;
-		}
-	}
-
-	@Override
 	public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLivingBase living, ItemStack stack) {
 		int l = MathHelper.floor_double(living.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		int meta = stack.getItemDamage();
@@ -181,9 +147,9 @@ public class BlockSafetyBox extends BlockContainer {
 		}
 
 		TileEntity tile = world.getTileEntity(par2, par3, par4);
-		TileSafetyBox tileentity = null;
-		if (tile != null && tile instanceof TileSafetyBox) {
-			tileentity = (TileSafetyBox) tile;
+		TileSafetyChest tileentity = null;
+		if (tile != null && tile instanceof TileSafetyChest) {
+			tileentity = (TileSafetyChest) tile;
 		}
 
 		if (tileentity != null) {
@@ -206,15 +172,11 @@ public class BlockSafetyBox extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":gadget/storage_b");
-		this.texS = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":gadget/storage_s");
-		this.texF = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":gadget/storage_f");
-		this.texT = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":gadget/storage_t");
-		this.texB = par1IconRegister.registerIcon(EcoMTCore.PACKAGE + ":gadget/storage_b");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int a) {
-		return new TileSafetyBox();
+		return new TileSafetyChest();
 	}
 
 }

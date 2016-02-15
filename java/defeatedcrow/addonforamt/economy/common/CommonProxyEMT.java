@@ -14,6 +14,7 @@ import defeatedcrow.addonforamt.economy.client.gui.ContainerGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderDisplay;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerOrderExchanger;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerSafetyBox;
+import defeatedcrow.addonforamt.economy.client.gui.ContainerSafetyChest;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerShopDisp;
 import defeatedcrow.addonforamt.economy.client.gui.ContainerStampCatalog;
 import defeatedcrow.addonforamt.economy.client.gui.GuiDistributor;
@@ -23,6 +24,7 @@ import defeatedcrow.addonforamt.economy.client.gui.GuiGeneratorEMT;
 import defeatedcrow.addonforamt.economy.client.gui.GuiOrderDisplay;
 import defeatedcrow.addonforamt.economy.client.gui.GuiOrderExchanger;
 import defeatedcrow.addonforamt.economy.client.gui.GuiSafetyBox;
+import defeatedcrow.addonforamt.economy.client.gui.GuiSafetyChest;
 import defeatedcrow.addonforamt.economy.client.gui.GuiShopDisp;
 import defeatedcrow.addonforamt.economy.client.gui.GuiStampCatalog;
 import defeatedcrow.addonforamt.economy.common.block.TileDistributor;
@@ -32,6 +34,7 @@ import defeatedcrow.addonforamt.economy.common.block.TileGeneratorEMT;
 import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
 import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
+import defeatedcrow.addonforamt.economy.common.quest.TileSafetyChest;
 import defeatedcrow.addonforamt.economy.common.shop.TileColdShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileDisplayShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileMealShop;
@@ -72,6 +75,7 @@ public class CommonProxyEMT implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileOrderBoard.class, "defeatedcrow.emt.orderBoardTile");
 		GameRegistry.registerTileEntity(OrderExchanger.class, "defeatedcrow.emt.orderTransactionTile");
 		GameRegistry.registerTileEntity(TileSafetyBox.class, "defeatedcrow.emt.safetyTile");
+		GameRegistry.registerTileEntity(TileSafetyChest.class, "defeatedcrow.emt.safetyStorageTile");
 		// shop
 		GameRegistry.registerTileEntity(TileShopMonitor.class, "defeatedcrow.emt.shopMonitorTile");
 		GameRegistry.registerTileEntity(TileColdShop.class, "defeatedcrow.emt.coldShopTile");
@@ -97,6 +101,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new ContainerOrderDisplay(player, (TileOrderBoard) tileentity);
 		} else if (tileentity instanceof TileSafetyBox) {
 			return new ContainerSafetyBox(player, (TileSafetyBox) tileentity);
+		} else if (tileentity instanceof TileSafetyChest) {
+			return new ContainerSafetyChest(player, (TileSafetyChest) tileentity);
 		} else if (tileentity instanceof OrderExchanger) {
 			return new ContainerOrderExchanger(player, (OrderExchanger) tileentity);
 		} else if (tileentity instanceof TileDisplayShop) {
@@ -124,6 +130,8 @@ public class CommonProxyEMT implements IGuiHandler {
 			return new GuiOrderDisplay(player, (TileOrderBoard) tileentity);
 		} else if (tileentity instanceof TileSafetyBox) {
 			return new GuiSafetyBox(player, (TileSafetyBox) tileentity);
+		} else if (tileentity instanceof TileSafetyChest) {
+			return new GuiSafetyChest(player, (TileSafetyChest) tileentity);
 		} else if (tileentity instanceof OrderExchanger) {
 			return new GuiOrderExchanger(player, (OrderExchanger) tileentity);
 		} else if (tileentity instanceof TileDisplayShop) {

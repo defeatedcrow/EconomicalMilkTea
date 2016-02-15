@@ -25,6 +25,8 @@ public class TESRMealShop extends TileEntitySpecialRenderer {
 
 	private static final ResourceLocation tex = new ResourceLocation(EcoMTCore.PACKAGE
 			+ ":textures/blocks/tileentity/mealshop.png");
+	private static final ResourceLocation alttex = new ResourceLocation(EcoMTCore.PACKAGE
+			+ ":textures/blocks/tileentity/mealshop_alt.png");
 	public static TESRMealShop renderer;
 	private ModelMealShop model = new ModelMealShop();
 
@@ -54,7 +56,11 @@ public class TESRMealShop extends TileEntitySpecialRenderer {
 
 		boolean alt = (m & 4) != 0;
 
-		this.bindTexture(tex);
+		if (EcoMTCore.useAltTex) {
+			this.bindTexture(alttex);
+		} else {
+			this.bindTexture(tex);
+		}
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -67,7 +73,6 @@ public class TESRMealShop extends TileEntitySpecialRenderer {
 		} else {
 			model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
-
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
 

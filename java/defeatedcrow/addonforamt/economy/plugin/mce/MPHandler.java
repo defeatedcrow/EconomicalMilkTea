@@ -10,7 +10,7 @@ public class MPHandler {
 	private MPHandler() {
 	}
 
-	public static int max = 1000000;
+	public static int max = 9999900;
 
 	public static final MPHandler INSTANCE = new MPHandler();
 

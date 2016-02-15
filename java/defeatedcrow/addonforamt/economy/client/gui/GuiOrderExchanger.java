@@ -130,7 +130,7 @@ public class GuiOrderExchanger extends GuiContainer {
 					list.add(s3);
 					list.add(s1 + limit + s2);
 
-					boolean ach = tile.keep[i] / tile.requires[i] >= 1.0F;
+					boolean ach = tile.keep[i] >= tile.requires[i];
 					if (ach) {
 						String s4 = StatCollector.translateToLocal("dcs.emt.order.achieved");
 						list.add(s4);

@@ -90,7 +90,7 @@ public class ItemBill extends Item implements IMPCoin {
 		} else {
 			int mp = this.getMP(stack.getItemDamage());
 			int add = MPHandler.INSTANCE.addPlayerMP(player, mp, true);
-			if (add >= mp) {
+			if (add == mp) {
 				MPHandler.INSTANCE.addPlayerMP(player, mp, false);
 				if (!player.capabilities.isCreativeMode && --stack.stackSize <= 0) {
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);

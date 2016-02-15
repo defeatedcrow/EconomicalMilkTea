@@ -18,15 +18,18 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import defeatedcrow.addonforamt.economy.EcoMTCore;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderColdShop;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderCropShop;
+import defeatedcrow.addonforamt.economy.client.block.ItemRenderBase;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderDistributor;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderENTank;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderMealShop;
 import defeatedcrow.addonforamt.economy.client.block.ItemRenderMotor;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderSafetyBox;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderShopMonitor;
-import defeatedcrow.addonforamt.economy.client.block.ItemRenderTransactionBox;
+import defeatedcrow.addonforamt.economy.client.block.ItemRenderSafetyChest;
+import defeatedcrow.addonforamt.economy.client.block.ModelColdShop;
+import defeatedcrow.addonforamt.economy.client.block.ModelCropShop;
+import defeatedcrow.addonforamt.economy.client.block.ModelENTank;
+import defeatedcrow.addonforamt.economy.client.block.ModelMealShop;
+import defeatedcrow.addonforamt.economy.client.block.ModelSafetyBox;
+import defeatedcrow.addonforamt.economy.client.block.ModelSafetyChest;
+import defeatedcrow.addonforamt.economy.client.block.ModelShopMonitor;
+import defeatedcrow.addonforamt.economy.client.block.ModelTransactionBox;
 import defeatedcrow.addonforamt.economy.client.block.RBDummy;
 import defeatedcrow.addonforamt.economy.client.block.RBOrderBoard;
 import defeatedcrow.addonforamt.economy.client.block.TESRColdShop;
@@ -36,6 +39,7 @@ import defeatedcrow.addonforamt.economy.client.block.TESRENMotor;
 import defeatedcrow.addonforamt.economy.client.block.TESRENTank;
 import defeatedcrow.addonforamt.economy.client.block.TESRMealShop;
 import defeatedcrow.addonforamt.economy.client.block.TESRSafetyBox;
+import defeatedcrow.addonforamt.economy.client.block.TESRSafetyChest;
 import defeatedcrow.addonforamt.economy.client.block.TESRShopMonitor;
 import defeatedcrow.addonforamt.economy.client.block.TESRTransactionBox;
 import defeatedcrow.addonforamt.economy.client.entity.BeamEffect;
@@ -48,6 +52,7 @@ import defeatedcrow.addonforamt.economy.common.block.TileGeneratorEMT;
 import defeatedcrow.addonforamt.economy.common.quest.OrderExchanger;
 import defeatedcrow.addonforamt.economy.common.quest.TileOrderBoard;
 import defeatedcrow.addonforamt.economy.common.quest.TileSafetyBox;
+import defeatedcrow.addonforamt.economy.common.quest.TileSafetyChest;
 import defeatedcrow.addonforamt.economy.common.shop.TileColdShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileDisplayShop;
 import defeatedcrow.addonforamt.economy.common.shop.TileMealShop;
@@ -79,23 +84,30 @@ public class ClientProxyEMT extends CommonProxyEMT {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.distributor),
 				new ItemRenderDistributor());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.motor), new ItemRenderMotor());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.enTank), new ItemRenderENTank());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.enTank), new ItemRenderBase(
+				new ModelENTank(), ":textures/blocks/tileentity/entank.png"));
 
-		MinecraftForgeClient
-				.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.safetyBox), new ItemRenderSafetyBox());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.questBlock),
-				new ItemRenderTransactionBox());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.energyShop),
-				new ItemRenderShopMonitor());
-		MinecraftForgeClient
-				.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.emtShop), new ItemRenderShopMonitor());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.engeneerShop),
-				new ItemRenderShopMonitor());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.buildShop),
-				new ItemRenderShopMonitor());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.cropShop), new ItemRenderCropShop());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.mealShop), new ItemRenderMealShop());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.coldShop), new ItemRenderColdShop());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.safetyBox), new ItemRenderBase(
+				new ModelSafetyBox(), ":textures/blocks/tileentity/cashbox.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.safetyChest),
+				new ItemRenderSafetyChest(new ModelSafetyChest(), ":textures/blocks/tileentity/safetychest.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.questBlock), new ItemRenderBase(
+				new ModelTransactionBox(), EcoMTCore.useAltTex ? ":textures/blocks/tileentity/transactionbox_alt.png"
+						: ":textures/blocks/tileentity/transactionbox.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.energyShop), new ItemRenderBase(
+				new ModelShopMonitor(), ":textures/blocks/tileentity/shopmonitor.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.emtShop), new ItemRenderBase(
+				new ModelShopMonitor(), ":textures/blocks/tileentity/shopmonitor.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.engeneerShop), new ItemRenderBase(
+				new ModelShopMonitor(), ":textures/blocks/tileentity/shopmonitor.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.buildShop), new ItemRenderBase(
+				new ModelShopMonitor(), ":textures/blocks/tileentity/shopmonitor.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.cropShop), new ItemRenderBase(
+				new ModelCropShop(), ":textures/blocks/tileentity/cropshop.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.mealShop), new ItemRenderBase(
+				new ModelMealShop(), ":textures/blocks/tileentity/mealshop.png"));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EcoMTCore.coldShop), new ItemRenderBase(
+				new ModelColdShop(), ":textures/blocks/tileentity/coldshop.png"));
 	}
 
 	@Override
@@ -111,6 +123,8 @@ public class ClientProxyEMT extends CommonProxyEMT {
 		ClientRegistry.registerTileEntity(OrderExchanger.class, "defeatedcrow.emt.orderTransactionTile",
 				new TESRTransactionBox());
 		ClientRegistry.registerTileEntity(TileSafetyBox.class, "defeatedcrow.emt.safetyTile", new TESRSafetyBox());
+		ClientRegistry.registerTileEntity(TileSafetyChest.class, "defeatedcrow.emt.safetyStorageTile",
+				new TESRSafetyChest());
 		// shop
 		ClientRegistry.registerTileEntity(TileShopMonitor.class, "defeatedcrow.emt.shopMonitorTile",
 				new TESRShopMonitor());
@@ -140,12 +154,10 @@ public class ClientProxyEMT extends CommonProxyEMT {
 
 	@Override
 	public void loadInit() {
-		// 没
-		// MinecraftForge.EVENT_BUS.register(new RenderTicketEvent());
-
 		Render render = new BeamRenderer();
 		RenderingRegistry.registerEntityRenderingHandler(BeamEffect.class, render);
 		MinecraftForge.EVENT_BUS.register(new HandleCoodTicketEvent());
+		MinecraftForge.EVENT_BUS.register(new RenderBuildCardEvent());
 	}
 
 	@Override
