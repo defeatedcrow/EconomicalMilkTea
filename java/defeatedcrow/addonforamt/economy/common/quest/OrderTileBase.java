@@ -295,16 +295,26 @@ public abstract class OrderTileBase extends TileEntity implements ISidedInventor
 				if (ret != null && ret.getItem() != null) {
 					input = ret;
 					input.stackSize = 1;
+					if (input.getItemDamage() == 32767) {
+						input = new ItemStack(ret.getItem(), 1, 0);
+						NBTTagCompound tag = new NBTTagCompound();
+						tag.setBoolean("EMT_M", true);
+						input.setTagCompound(tag);
+					}
 				}
-			} else if (order.getRequest() instanceof String) {
+			}
+			if (order.getRequest() instanceof String) {
 				String ore = (String) order.getRequest();
-				NBTTagCompound tag = new NBTTagCompound();
-				tag.setString("OreName", ore);
-				input.setTagCompound(tag);
+				NBTTagCompound tag2 = new NBTTagCompound();
+				tag2.setString("EMT_O", ore);
+				input.setTagCompound(tag2);
 			}
 			this.displayItems[slot] = input;
 			EMTLogger.debugInfo("New Order: item " + input.getDisplayName() + ", require " + requires[slot]
 					+ ", reward " + rewards[slot] + ", ID " + id[slot]);
+			if (input.hasTagCompound()) {
+				EMTLogger.debugInfo("It has Tag.");
+			}
 		} else {
 			// ダミーを渡す
 			IOrder dummy = RecipeManagerEMT.orderRegister.getDummyOrder(type);

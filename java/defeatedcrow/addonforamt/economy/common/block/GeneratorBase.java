@@ -15,7 +15,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModAPIManager;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,7 +46,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	public GeneratorBase() {
 		super();
-		if (Loader.isModLoaded("IC2")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
 			EUChannel = EUSourceManagerEMT.getChannel(this, this.getMaxChargeAmount() * exchangeRateEU(), 1);
 		}
 	}
@@ -235,7 +235,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 			// 送信処理
 			this.onDischarge();
 
-			if (Loader.isModLoaded("IC2") && EUChannel != null)
+			if (ModAPIManager.INSTANCE.hasAPI("IC2API") && EUChannel != null)
 				this.updateEU();
 			/*
 			 * GUIの炎ゲージを動かす
@@ -277,7 +277,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 	public boolean isChargeableBattery(ItemStack item) {
 		boolean flag = false;
 
-		if (Loader.isModLoaded("IC2")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
 			flag = EUItemHandlerEMT.isChargeable(item);
 		} else if (item != null && item.getItem() instanceof IBattery) {
 			flag = true;
@@ -292,7 +292,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 	 */
 	public int chargeAnotherBattery(ItemStack item, int inc, boolean isSimulate) {
 		int ret = 0;
-		if (Loader.isModLoaded("IC2")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
 			int i = EUItemHandlerEMT.chargeAmount(item, inc * this.exchangeRateEU(), isSimulate);
 			ret = Math.round(i / this.exchangeRateEU());
 		}

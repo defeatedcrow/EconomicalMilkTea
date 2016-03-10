@@ -57,7 +57,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	public TileENMotor() {
 		super();
-		if (Loader.isModLoaded("IC2")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
 			EUChannel = EUSinkManagerEMT.getChannel(this, 128, 3);
 		}
 	}
@@ -557,7 +557,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			int ret = 0;
 			int inc = 16; // 速度はチャージバッテリーと同じ
 
-			if (Loader.isModLoaded("IC2") && ret == 0) {
+			if (ModAPIManager.INSTANCE.hasAPI("IC2API") && ret == 0) {
 				int i = EUItemHandlerEMT.dischargeAmount(stack, inc * exchangeRateEU(), true);
 				ret = Math.round(i / exchangeRateEU());
 			}
@@ -581,7 +581,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			int ret = 0;
 			int inc = amount;
 
-			if (Loader.isModLoaded("IC2") && ret == 0) {
+			if (ModAPIManager.INSTANCE.hasAPI("IC2API") && ret == 0) {
 				int i = EUItemHandlerEMT.dischargeAmount(item, inc * exchangeRateEU(), false);
 				ret = Math.round(i / exchangeRateEU());
 

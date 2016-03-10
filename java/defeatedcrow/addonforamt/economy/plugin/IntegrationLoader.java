@@ -108,8 +108,8 @@ public class IntegrationLoader {
 					OrderBiome.ARID, "dcs.emt.ordername.long_cold_azuki");
 
 		if (OreDictionary.doesOreNameExist("cropCabbage"))
-			RecipeManagerEMT.orderRegister.addRecipe("cropCabagge", 6000, 300000, OrderType.LONG, OrderSeason.NONE,
-					OrderBiome.ARID, "dcs.emt.ordername.long_cold_cabagge");
+			RecipeManagerEMT.orderRegister.addRecipe("cropCabbage", 6000, 300000, OrderType.LONG, OrderSeason.NONE,
+					OrderBiome.ARID, "dcs.emt.ordername.long_cold_cabbage");
 
 		if (OreDictionary.doesOreNameExist("cropLeek"))
 			RecipeManagerEMT.orderRegister.addRecipe("cropLeek", 8000, 180000, OrderType.LONG, OrderSeason.NONE,
@@ -137,8 +137,8 @@ public class IntegrationLoader {
 					OrderBiome.NONE, "dcs.emt.ordername.middle_azuki");
 
 		if (OreDictionary.doesOreNameExist("cropCabbage"))
-			RecipeManagerEMT.orderRegister.addRecipe("cropCabagge", 480, 40000, OrderType.MIDDLE, OrderSeason.NONE,
-					OrderBiome.NONE, "dcs.emt.ordername.middle_cabagge");
+			RecipeManagerEMT.orderRegister.addRecipe("cropCabbage", 480, 40000, OrderType.MIDDLE, OrderSeason.NONE,
+					OrderBiome.NONE, "dcs.emt.ordername.middle_cabbage");
 
 		if (OreDictionary.doesOreNameExist("cropLeek"))
 			RecipeManagerEMT.orderRegister.addRecipe("cropLeek", 720, 32000, OrderType.MIDDLE, OrderSeason.NONE,

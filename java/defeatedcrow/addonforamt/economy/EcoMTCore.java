@@ -11,6 +11,7 @@ package defeatedcrow.addonforamt.economy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.common.Loader;
@@ -24,6 +25,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 import defeatedcrow.addonforamt.economy.common.CommonProxyEMT;
+import defeatedcrow.addonforamt.economy.common.quest.CustomTooltipEvent;
 import defeatedcrow.addonforamt.economy.common.quest.OrderPool;
 import defeatedcrow.addonforamt.economy.common.quest.OrderRegister;
 import defeatedcrow.addonforamt.economy.common.recipe.FuelFluidRegister;
@@ -39,7 +41,7 @@ import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_1.1a",
+		version = "1.7.10_1.1c",
 		dependencies = "required-after:Forge@[10.13.4.1448,);required-after:mceconomy2@[2.5,);after:DCsAppleMilk@[1.7.10_2.9a,)")
 public class EcoMTCore {
 
@@ -174,6 +176,7 @@ public class EcoMTCore {
 
 		EMTPacketHandler.init();
 
+		MinecraftForge.EVENT_BUS.register(new CustomTooltipEvent());
 	}
 
 	@EventHandler
@@ -194,7 +197,7 @@ public class EcoMTCore {
 	}
 
 	public String getRivision() {
-		return "a";
+		return "c";
 	}
 
 	public String getModName() {

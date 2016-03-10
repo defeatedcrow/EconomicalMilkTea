@@ -41,6 +41,7 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 	public boolean isOpen = false;
 	private int lastOpen = 0;
 	private int openCount = 0;
+	private int lastKeep = 0;
 
 	public int[] keep = {
 			0,
@@ -78,6 +79,14 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 			b = true;
 		}
 
+		if (!b) {
+			int k = keep[0] + keep[1] + keep[2] + keep[3];
+			if (k != lastKeep) {
+				lastKeep = k;
+				b = true;
+			}
+		}
+
 		if (b) {
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
@@ -111,11 +120,16 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 					if (slot.getItem() == target.getItem()
 							&& (slot.getItemDamage() == target.getItemDamage() || target.getItemDamage() == 32767)) {
 						int red = slot.stackSize;
-						keep[j] += red;
-						this.decrStackSize(i, red);
-						this.markDirty();
-						b = true;
-						EMTLogger.debugInfo("matchItem +" + red);
+						int cap = order.getRequestNum() * 5 - keep[j];
+						if (red > cap)
+							red = cap;
+						if (red > 0) {
+							keep[j] += red;
+							this.decrStackSize(i, red);
+							this.markDirty();
+							b = true;
+							EMTLogger.debugInfo("matchItem +" + red);
+						}
 						break;
 					}
 				} else if (check instanceof String) {
@@ -127,11 +141,16 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 					for (int k : get) {
 						if (k == target) {
 							int red = slot.stackSize;
-							keep[j] += red;
-							this.decrStackSize(i, red);
-							this.markDirty();
-							b = true;
-							EMTLogger.debugInfo("matchItem +" + red);
+							int cap = order.getRequestNum() * 5 - keep[j];
+							if (red > cap)
+								red = cap;
+							if (red > 0) {
+								keep[j] += red;
+								this.decrStackSize(i, red);
+								this.markDirty();
+								b = true;
+								EMTLogger.debugInfo("matchItem +" + red);
+							}
 							break;
 						}
 					}
@@ -182,10 +201,15 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 													&& (slot.getItemDamage() == target.getItemDamage() || target
 															.getItemDamage() == 32767)) {
 												int red = slot.stackSize;
-												keep[j] += red;
-												targetInv.decrStackSize(l, red);
-												this.markDirty();
-												b = true;
+												int cap = order.getRequestNum() * 5 - keep[j];
+												if (red > cap)
+													red = cap;
+												if (red > 0) {
+													keep[j] += red;
+													targetInv.decrStackSize(l, red);
+													this.markDirty();
+													b = true;
+												}
 												break;
 											}
 										}
@@ -200,10 +224,15 @@ public class OrderExchanger extends OrderTileBase implements IMPStorageBlock {
 													&& (slot.getItemDamage() == target.getItemDamage() || target
 															.getItemDamage() == 32767)) {
 												int red = slot.stackSize;
-												keep[j] += red;
-												targetInv.decrStackSize(l, red);
-												this.markDirty();
-												b = true;
+												int cap = order.getRequestNum() * 5 - keep[j];
+												if (red > cap)
+													red = cap;
+												if (red > 0) {
+													keep[j] += red;
+													targetInv.decrStackSize(l, red);
+													this.markDirty();
+													b = true;
+												}
 												break;
 											}
 										}
