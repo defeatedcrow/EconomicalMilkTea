@@ -41,7 +41,7 @@ import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
 
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_1.1c",
+		version = "1.7.10_1.1d",
 		dependencies = "required-after:Forge@[10.13.4.1448,);required-after:mceconomy2@[2.5,);after:DCsAppleMilk@[1.7.10_2.9a,)")
 public class EcoMTCore {
 
@@ -197,7 +197,7 @@ public class EcoMTCore {
 	}
 
 	public String getRivision() {
-		return "c";
+		return "d";
 	}
 
 	public String getModName() {

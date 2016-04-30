@@ -796,7 +796,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 		int extract = ret * this.exchangeRateRF();
 
 		if (ret > 0) {
-			if (paramBoolean) {
+			if (!paramBoolean) {
 				EMTLogger.debugInfo("send RF2 : " + extract);
 				this.chargeAmount -= ret;
 			}
