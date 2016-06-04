@@ -55,7 +55,7 @@ public class ItemVillageBuild extends Item implements ISimpleBuildingItem {
 			int meta = stack.getItemDamage();
 			int t = meta >> 3;
 			int r = meta & 7;
-			int n = t > 6 ? 0 : t + 1;
+			int n = t > 11 ? 0 : t + 1;
 			int newMeta = (n << 3) + r;
 			world.playSoundAtEntity(player, "random.pop", 0.4F, 1.8F);
 			return new ItemStack(stack.getItem(), stack.stackSize, newMeta);
@@ -185,9 +185,17 @@ public class ItemVillageBuild extends Item implements ISimpleBuildingItem {
 		case 5:
 			return new BlockSet(Blocks.stonebrick, 0);
 		case 6:
-			return new BlockSet(Blocks.stone, 0);
-		case 7:
 			return new BlockSet(Blocks.sandstone, 0);
+		case 7:
+			return new BlockSet(Blocks.hardened_clay, 0);
+		case 8:
+			return new BlockSet(Blocks.wool, 0);
+		case 9:
+			return new BlockSet(Blocks.stone, 0);
+		case 10:
+			return new BlockSet(Blocks.cobblestone, 0);
+		case 11:
+			return new BlockSet(Blocks.dirt, 0);
 		default:
 			return new BlockSet(Blocks.planks, 0);
 		}

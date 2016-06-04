@@ -142,7 +142,7 @@ public class TileENTank extends GeneratorBase {
 
 	@Override
 	public String getInventoryName() {
-		return StatCollector.translateToLocal("dcs.energy.tankInv.gui");
+		return StatCollector.translateToLocal("dcs.emt.tankInv.gui");
 	}
 
 }

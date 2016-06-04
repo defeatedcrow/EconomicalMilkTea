@@ -65,10 +65,10 @@ public class TESRCropShop extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 
 		float[] fx = {
-				-0.2F,
 				0.2F,
 				-0.2F,
-				0.2F };
+				0.2F,
+				-0.2F };
 		float[] fy = {
 				0.0F,
 				0.0F,
@@ -106,9 +106,9 @@ public class TESRCropShop extends TileEntitySpecialRenderer {
 			entityitem.hoverStart = 0.0F;
 
 			if (item.getItem() instanceof ItemBlock) {
-				GL11.glScalef(0.65F, 0.65F, 0.65F);
+				GL11.glScalef(-0.65F, 0.65F, -0.65F);
 			} else {
-				GL11.glScalef(0.65F, 0.65F, 0.65F);
+				GL11.glScalef(-0.65F, 0.65F, -0.65F);
 			}
 
 			RenderItem.renderInFrame = true;

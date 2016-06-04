@@ -372,7 +372,7 @@ public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IP
 
 	@Override
 	public String getInventoryName() {
-		return StatCollector.translateToLocal("dcs.energy.generatorInv.gui");
+		return StatCollector.translateToLocal("dcs.emt.generatorInv.gui");
 	}
 
 	@Override

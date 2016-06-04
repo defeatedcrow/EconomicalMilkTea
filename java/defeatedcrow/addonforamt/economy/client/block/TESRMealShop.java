@@ -118,9 +118,9 @@ public class TESRMealShop extends TileEntitySpecialRenderer {
 			entityitem.hoverStart = 0.0F;
 
 			if (item.getItem() instanceof ItemBlock) {
-				GL11.glScalef(0.65F, 0.65F, 0.65F);
+				GL11.glScalef(-0.65F, 0.65F, -0.65F);
 			} else {
-				GL11.glScalef(0.65F, 0.65F, 0.65F);
+				GL11.glScalef(-0.65F, 0.65F, -0.65F);
 			}
 
 			RenderItem.renderInFrame = true;

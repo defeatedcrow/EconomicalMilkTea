@@ -78,10 +78,18 @@ public class ItemRoofBuild extends ItemSimpleBuild {
 		case 4:
 			return new BlockSet(Blocks.brick_stairs, 0);
 		case 5:
-			return new BlockSet(Blocks.stone_stairs, 0);
+			return new BlockSet(Blocks.dark_oak_stairs, 0);
 		case 6:
-			return new BlockSet(Blocks.stone_brick_stairs, 0);
+			return new BlockSet(Blocks.acacia_stairs, 0);
 		case 7:
+			return new BlockSet(Blocks.brick_stairs, 0);
+		case 8:
+			return new BlockSet(Blocks.stone_brick_stairs, 0);
+		case 9:
+			return new BlockSet(Blocks.sandstone_stairs, 0);
+		case 10:
+			return new BlockSet(Blocks.stone_stairs, 0);
+		case 11:
 			return new BlockSet(Blocks.nether_brick_stairs, 0);
 		default:
 			return new BlockSet(Blocks.oak_stairs, 0);

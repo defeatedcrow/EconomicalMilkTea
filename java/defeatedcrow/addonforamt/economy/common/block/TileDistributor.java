@@ -311,7 +311,7 @@ public class TileDistributor extends TileEntity implements ISidedInventory {
 	// インベントリの名前
 	@Override
 	public String getInventoryName() {
-		return StatCollector.translateToLocal("dcs.energy.distributor.gui");
+		return StatCollector.translateToLocal("dcs.emt.distributor.gui");
 	}
 
 	// 多言語対応かどうか

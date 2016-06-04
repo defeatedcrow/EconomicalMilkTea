@@ -87,7 +87,8 @@ public class ContainerSafetyBox extends Container {
 					return null;
 			}
 			// アイテムの移動(スロット27～62へ)
-			else if (!this.mergeItemStack(itemstack1, 27, sLim, false))
+			else
+				/* if (!this.mergeItemStack(itemstack1, 27, sLim, false)) */
 				return null;
 
 			if (itemstack1.stackSize == 0) {

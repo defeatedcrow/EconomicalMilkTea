@@ -1,7 +1,6 @@
 package defeatedcrow.addonforamt.economy.common.build;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import defeatedcrow.addonforamt.economy.api.BuildType;
@@ -43,31 +42,6 @@ public class ItemPlateBuild extends ItemSimpleBuild {
 	@Override
 	public boolean forceReplace() {
 		return true;
-	}
-
-	@Override
-	protected BlockSet getPlaceBlock(int meta) {
-		int i = meta >> 3;
-		switch (i) {
-		case 0:
-			return new BlockSet(Blocks.planks, 0);
-		case 1:
-			return new BlockSet(Blocks.planks, 1);
-		case 2:
-			return new BlockSet(Blocks.planks, 2);
-		case 3:
-			return new BlockSet(Blocks.glass, 0);
-		case 4:
-			return new BlockSet(Blocks.brick_block, 0);
-		case 5:
-			return new BlockSet(Blocks.stonebrick, 0);
-		case 6:
-			return new BlockSet(Blocks.stone, 0);
-		case 7:
-			return new BlockSet(Blocks.cobblestone, 0);
-		default:
-			return new BlockSet(Blocks.planks, 0);
-		}
 	}
 
 }

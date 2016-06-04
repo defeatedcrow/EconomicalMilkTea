@@ -8,7 +8,7 @@ tile.defeatedcrow.emt.en_motor.name=Yuzu Energy Motor
 tile.defeatedcrow.emt.emt_shop.name=EMT Shoji Trade Shop
 tile.defeatedcrow.emt.energy_shop.name=Yuzu Machines Shop
 tile.defeatedcrow.emt.cold_shop.name=Cold Shop
-tile.defeatedcrow.emt.engeneer_shop.name=MOD Engeneer's Shop
+tile.defeatedcrow.emt.engeneer_shop.name=MOD Engineer's Shop
 tile.defeatedcrow.emt.building_shop.name=Builder's Shop
 tile.defeatedcrow.emt.crop_shop.name=Crop Shop
 tile.defeatedcrow.emt.meal_shop.name=Meal Shop
@@ -218,7 +218,7 @@ dcs.emt.ordername.short_ic2_copperC=Copper is necessary
 dcs.emt.ordername.short_ic2_tinC=Tin is necessary
 
 dcs.emt.ordername.short_amt_nikawa=Stickey materials
-dcs.emt.ordername.short_amt_condensedmilk=Condensed milk please
+dcs.emt.ordername.short_amt_condencedmilk=Condensed milk please
 dcs.emt.ordername.short_amt_yuzujam=Yuzu marmalade
 dcs.emt.ordername.short_amt_chal=What is the chalcedony?
 dcs.emt.ordername.short_amt_icycristal=Icy jems

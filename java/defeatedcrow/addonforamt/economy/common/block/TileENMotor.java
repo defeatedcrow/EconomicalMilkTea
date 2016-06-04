@@ -684,7 +684,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 	// インベントリの名前
 	@Override
 	public String getInventoryName() {
-		return StatCollector.translateToLocal("dcs.energy.motorInv.gui");
+		return StatCollector.translateToLocal("dcs.emt.motorInv.gui");
 	}
 
 	// 多言語対応かどうか

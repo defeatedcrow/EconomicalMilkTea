@@ -1,0 +1,16 @@
+[
+{
+  "modid": "DCsEcoMT",
+  "name": "EconomicalMilkTea!",
+  "description": "Economical life, economical milk tea.",
+  "version": "1.7.10_1.2a",
+  "mcversion": "1.7.10",
+  "url": "http://defeatedcrow.jp/modwiki/EconomicalMilkTea",
+  "updateUrl": "http://defeatedcrow.jp/modwiki/EconomicalMilkTea",
+  "authorList": ["defeatedcrow"],
+  "credits": "defeatedcrow",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [MCEconomy2_2.5.1+]
+}
+]
