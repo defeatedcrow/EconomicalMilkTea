@@ -46,7 +46,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	public GeneratorBase() {
 		super();
-		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API") && EUSourceManagerEMT.isEULoaded()) {
 			EUChannel = EUSourceManagerEMT.getChannel(this, this.getMaxChargeAmount() * exchangeRateEU(), 1);
 		}
 	}
@@ -548,25 +548,25 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	/* -- IEnergySource -- */
 
-	@Optional.Method(modid = "IC2")
+	@Optional.Method(modid = "IC2API")
 	@Override
 	public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
 		return EUChannel.emitsEnergyTo2(receiver, direction);
 	}
 
-	@Optional.Method(modid = "IC2")
+	@Optional.Method(modid = "IC2API")
 	@Override
 	public double getOfferedEnergy() {
 		return EUChannel.getOfferedEnergy2();
 	}
 
-	@Optional.Method(modid = "IC2")
+	@Optional.Method(modid = "IC2API")
 	@Override
 	public void drawEnergy(double amount) {
 		EUChannel.drawEnergy2(amount);
 	}
 
-	@Optional.Method(modid = "IC2")
+	@Optional.Method(modid = "IC2API")
 	@Override
 	public int getSourceTier() {
 		return EUChannel.getSourceTier2();

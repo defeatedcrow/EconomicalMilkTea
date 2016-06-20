@@ -27,6 +27,7 @@ import defeatedcrow.addonforamt.economy.EMTLogger;
 import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
 import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
 import defeatedcrow.addonforamt.economy.plugin.energy.EUSinkManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
 import defeatedcrow.addonforamt.economy.plugin.energy.IEUSinkChannelEMT;
 import defeatedcrow.addonforamt.economy.plugin.energy.RFDeviceHandlerEMT;
 import defeatedcrow.addonforamt.economy.plugin.ss2.SS2DeviceHandlerEMT;
@@ -57,7 +58,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	public TileENMotor() {
 		super();
-		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API") && EUSourceManagerEMT.isEULoaded()) {
 			EUChannel = EUSinkManagerEMT.getChannel(this, 128, 3);
 		}
 	}

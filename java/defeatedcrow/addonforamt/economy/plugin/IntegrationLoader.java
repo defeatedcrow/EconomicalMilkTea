@@ -11,6 +11,7 @@ import defeatedcrow.addonforamt.economy.api.order.OrderType;
 import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
 import defeatedcrow.addonforamt.economy.plugin.amt.FluidityIntegration;
 import defeatedcrow.addonforamt.economy.plugin.amt.IronChainIntegration;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
 import defeatedcrow.addonforamt.economy.plugin.ss2.SS2Integration;
 
 public class IntegrationLoader {
@@ -49,6 +50,8 @@ public class IntegrationLoader {
 		if (Loader.isModLoaded("Railcraft")) {
 			RCIntegration.load();
 		}
+
+		EUSourceManagerEMT.init();
 	}
 
 	static void addOrder() {
