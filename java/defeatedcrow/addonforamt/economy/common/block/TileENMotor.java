@@ -1,5 +1,6 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
+import ic2.api.energy.EnergyNet;
 import mods.defeatedcrow.api.charge.ChargeItemManager;
 import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeItem;
@@ -57,7 +58,7 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	public TileENMotor() {
 		super();
-		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API") && EnergyNet.instance != null) {
 			EUChannel = EUSinkManagerEMT.getChannel(this, 128, 3);
 		}
 	}
