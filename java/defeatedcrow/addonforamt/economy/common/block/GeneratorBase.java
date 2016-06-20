@@ -1,5 +1,6 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
+import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySource;
 import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeableMachine;
@@ -46,7 +47,7 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	public GeneratorBase() {
 		super();
-		if (ModAPIManager.INSTANCE.hasAPI("IC2API")) {
+		if (ModAPIManager.INSTANCE.hasAPI("IC2API") && EnergyNet.instance != null) {
 			EUChannel = EUSourceManagerEMT.getChannel(this, this.getMaxChargeAmount() * exchangeRateEU(), 1);
 		}
 	}
