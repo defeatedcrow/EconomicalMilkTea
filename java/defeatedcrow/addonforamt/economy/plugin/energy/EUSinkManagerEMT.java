@@ -8,7 +8,12 @@ public class EUSinkManagerEMT {
 	}
 
 	public static IEUSinkChannelEMT getChannel(TileEntity tile, int cap, int tier) {
-		return new EUSinkChannelEMT(tile, cap, tier);
+		try {
+			return new EUSinkChannelEMT(tile, cap, tier);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
