@@ -1,5 +1,10 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
+import buildcraft.api.transport.IPipeConnection;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -12,21 +17,15 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import buildcraft.api.transport.IPipeConnection;
-import buildcraft.api.transport.IPipeTile.PipeType;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 
 /*
  * 発電機。
  * 液体燃料を消費してチャージ・EUを得る。
  * インベントリ・液体タンク有り
- * */
-@Optional.InterfaceList({ @Optional.Interface(
-		iface = "buildcraft.api.transport.IPipeConnection",
-		modid = "BuildCraft|Core"), })
+ */
+@Optional.InterfaceList({
+		@Optional.Interface(iface = "buildcraft.api.transport.IPipeConnection", modid = "BuildCraftAPI|Core"),
+})
 public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IPipeConnection {
 
 	// FluidTank
@@ -350,24 +349,22 @@ public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IP
 	@Override
 	protected int[] slotsTop() {
 		return new int[] {
-				0,
-				2 };
+				0, 2
+		};
 	}
 
 	@Override
 	protected int[] slotsBottom() {
 		return new int[] {
-				1,
-				3 };
+				1, 3
+		};
 	}
 
 	@Override
 	protected int[] slotsSides() {
 		return new int[] {
-				0,
-				1,
-				2,
-				3 };
+				0, 1, 2, 3
+		};
 	}
 
 	@Override
@@ -438,13 +435,18 @@ public class TileGeneratorEMT extends GeneratorBase implements IFluidHandler, IP
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[] { productTank.getInfo() };
+		return new FluidTankInfo[] {
+				productTank.getInfo()
+		};
 	}
 
 	// BuildCraft対応
-	@Optional.Method(modid = "BuildCraft|Core")
+	@Optional.Method(modid = "BuildCraftAPI|Core")
 	@Override
-	public ConnectOverride overridePipeConnection(PipeType type, ForgeDirection with) {
-		return type == PipeType.FLUID || type == PipeType.ITEM ? ConnectOverride.CONNECT : ConnectOverride.DISCONNECT;
+	public ConnectOverride overridePipeConnection(buildcraft.api.transport.IPipeTile.PipeType type,
+			ForgeDirection with) {
+		return type == buildcraft.api.transport.IPipeTile.PipeType.FLUID
+				|| type == buildcraft.api.transport.IPipeTile.PipeType.ITEM ? ConnectOverride.CONNECT
+						: ConnectOverride.DISCONNECT;
 	}
 }

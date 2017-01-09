@@ -3,17 +3,11 @@
  * URL:http://forum.minecraftuser.jp/viewtopic.php?f=13&t=17657
  * EconomicalMilkTea is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL.
  * Please check the License(MMPL_1.0).txt included in the package file of this Mod.
- * 
+ *
  * @author defeatedcrow
  */
 package defeatedcrow.addonforamt.economy;
 
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -36,12 +30,17 @@ import defeatedcrow.addonforamt.economy.plugin.IntegrationLoader;
 import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
 import defeatedcrow.addonforamt.economy.plugin.mce.MCEPlugin;
 import defeatedcrow.addonforamt.economy.util.ChunkLoaderController;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 @Mod(
-
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_1.1h",
+		version = "1.7.10_1.1i",
 		dependencies = "required-after:Forge@[10.13.4.1448,);required-after:mceconomy2@[2.5,);after:DCsAppleMilk@[1.7.10_2.9a,)")
 public class EcoMTCore {
 

@@ -2,15 +2,15 @@ package defeatedcrow.addonforamt.economy.plugin.amt;
 
 import java.util.ArrayList;
 
-import mods.defeatedcrow.common.DCsAppleMilk;
-import mods.defeatedcrow.common.config.PropertyHandler;
-import net.minecraft.item.ItemStack;
-import shift.mceconomy2.api.shop.IProduct;
 import defeatedcrow.addonforamt.economy.api.RecipeManagerEMT;
 import defeatedcrow.addonforamt.economy.api.order.OrderBiome;
 import defeatedcrow.addonforamt.economy.api.order.OrderSeason;
 import defeatedcrow.addonforamt.economy.api.order.OrderType;
 import defeatedcrow.addonforamt.economy.plugin.mce.EMTProduct;
+import mods.defeatedcrow.common.DCsAppleMilk;
+import mods.defeatedcrow.common.config.PropertyHandler;
+import net.minecraft.item.ItemStack;
+import shift.mceconomy2.api.shop.IProduct;
 
 public class AMTIntegration {
 
@@ -18,8 +18,7 @@ public class AMTIntegration {
 	public static int EUrate = 2;
 	public static int GFrate = 3;
 
-	private AMTIntegration() {
-	}
+	private AMTIntegration() {}
 
 	public static void load() {
 		loadProperty();
@@ -34,6 +33,10 @@ public class AMTIntegration {
 		RFrate = PropertyHandler.rateRF();
 		EUrate = PropertyHandler.rateEU();
 		GFrate = PropertyHandler.rateGF();
+
+		EnergyRate.rateRF = RFrate;
+		EnergyRate.rateGF = GFrate;
+		EnergyRate.rateEU = EUrate;
 	}
 
 	static void addOrder() {
@@ -100,8 +103,8 @@ public class AMTIntegration {
 		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(DCsAppleMilk.bottleCamOil, 1, 0), 12, 10000,
 				OrderType.SINGLE, OrderSeason.SPRING, OrderBiome.NONE, "dcs.emt.ordername.single_amt_camoil");
 
-		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(DCsAppleMilk.appleTart, 1, 1), 8, 4000,
-				OrderType.SINGLE, OrderSeason.SPRING, OrderBiome.NONE, "dcs.emt.ordername.single_amt_cassistart");
+		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(DCsAppleMilk.appleTart, 1, 1), 8, 4000, OrderType.SINGLE,
+				OrderSeason.SPRING, OrderBiome.NONE, "dcs.emt.ordername.single_amt_cassistart");
 
 		RecipeManagerEMT.orderRegister.addRecipe(new ItemStack(DCsAppleMilk.cLamp, 1, 4), 12, 30000, OrderType.SINGLE,
 				OrderSeason.SPRING, OrderBiome.NONE, "dcs.emt.ordername.single_amt_challamp");

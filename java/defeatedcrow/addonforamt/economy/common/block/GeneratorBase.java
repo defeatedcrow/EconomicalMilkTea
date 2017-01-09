@@ -1,5 +1,13 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
+import cpw.mods.fml.common.ModAPIManager;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import defeatedcrow.addonforamt.economy.plugin.amt.EnergyRate;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.IEUSourceChannelEMT;
 import ic2.api.energy.tile.IEnergySource;
 import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeableMachine;
@@ -15,14 +23,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
-import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.IEUSourceChannelEMT;
 
 /**
  * ChargeItemを燃料とするTileEntityのベースクラス。 <br>
@@ -30,9 +30,13 @@ import defeatedcrow.addonforamt.economy.plugin.energy.IEUSourceChannelEMT;
  * アイテム生産の必要が無いため該当部分を除去している。<br>
  * チャージゲージスロットは電池放電ではなく、電池やツールの充電のためのもの。
  */
-@Optional.InterfaceList({ @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = "IC2API"), })
-public abstract class GeneratorBase extends TileEntity implements ISidedInventory, IChargeableMachine,
-		IChargeGenerator, IEnergySource {
+@Optional.InterfaceList({
+		@Optional.Interface(
+				iface = "ic2.api.energy.tile.IEnergySource",
+				modid = "IC2API"),
+})
+public abstract class GeneratorBase extends TileEntity
+		implements ISidedInventory, IChargeableMachine, IChargeGenerator, IEnergySource {
 
 	// 現在のチャージ量
 	protected int chargeAmount = 0;
@@ -53,17 +57,17 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	public static int exchangeRateRF() {
 		// RF -> Charge
-		return AMTIntegration.RFrate;
+		return EnergyRate.rateRF;
 	}
 
 	public static int exchangeRateEU() {
 		// EU -> Charge
-		return AMTIntegration.EUrate;
+		return EnergyRate.rateEU;
 	}
 
 	public static int exchangeRateGF() {
 		// GF -> Charge
-		return AMTIntegration.GFrate;
+		return EnergyRate.rateGF;
 	}
 
 	@Override
@@ -479,17 +483,15 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 	// par1EntityPlayerがTileEntityを使えるかどうか
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer
-				.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false
+				: par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory() {
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory() {
-	}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int par1, ItemStack stack) {
@@ -548,27 +550,39 @@ public abstract class GeneratorBase extends TileEntity implements ISidedInventor
 
 	/* -- IEnergySource -- */
 
-	@Optional.Method(modid = "IC2API")
+	@Optional.Method(
+			modid = "IC2API")
 	@Override
 	public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+		if (EUChannel == null)
+			return false;
 		return EUChannel.emitsEnergyTo2(receiver, direction);
 	}
 
-	@Optional.Method(modid = "IC2API")
+	@Optional.Method(
+			modid = "IC2API")
 	@Override
 	public double getOfferedEnergy() {
+		if (EUChannel == null)
+			return 0;
 		return EUChannel.getOfferedEnergy2();
 	}
 
-	@Optional.Method(modid = "IC2API")
+	@Optional.Method(
+			modid = "IC2API")
 	@Override
 	public void drawEnergy(double amount) {
+		if (EUChannel == null)
+			return;
 		EUChannel.drawEnergy2(amount);
 	}
 
-	@Optional.Method(modid = "IC2API")
+	@Optional.Method(
+			modid = "IC2API")
 	@Override
 	public int getSourceTier() {
+		if (EUChannel == null)
+			return 0;
 		return EUChannel.getSourceTier2();
 	}
 }

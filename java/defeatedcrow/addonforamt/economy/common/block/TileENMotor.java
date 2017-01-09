@@ -1,5 +1,19 @@
 package defeatedcrow.addonforamt.economy.common.block;
 
+import cofh.api.energy.IEnergyProvider;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModAPIManager;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import defeatedcrow.addonforamt.economy.EMTLogger;
+import defeatedcrow.addonforamt.economy.plugin.amt.EnergyRate;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSinkManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.IEUSinkChannelEMT;
+import defeatedcrow.addonforamt.economy.plugin.energy.RFDeviceHandlerEMT;
+import defeatedcrow.addonforamt.economy.plugin.ss2.SS2DeviceHandlerEMT;
 import mods.defeatedcrow.api.charge.ChargeItemManager;
 import mods.defeatedcrow.api.charge.IChargeGenerator;
 import mods.defeatedcrow.api.charge.IChargeItem;
@@ -17,22 +31,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import cofh.api.energy.IEnergyProvider;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import defeatedcrow.addonforamt.economy.EMTLogger;
-import defeatedcrow.addonforamt.economy.plugin.amt.AMTIntegration;
-import defeatedcrow.addonforamt.economy.plugin.energy.EUItemHandlerEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.EUSinkManagerEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.EUSourceManagerEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.IEUSinkChannelEMT;
-import defeatedcrow.addonforamt.economy.plugin.energy.RFDeviceHandlerEMT;
-import defeatedcrow.addonforamt.economy.plugin.ss2.SS2DeviceHandlerEMT;
 
-@Optional.InterfaceList({ @Optional.Interface(iface = "cofh.api.energy.IEnergyProvider", modid = "CoFHAPI|energy"), })
+@Optional.InterfaceList({
+		@Optional.Interface(
+				iface = "cofh.api.energy.IEnergyProvider",
+				modid = "CoFHAPI|energy"),
+})
 public class TileENMotor extends TileEntity implements ISidedInventory, IChargeableMachine, IEnergyProvider {
 
 	// 現在のチャージ量
@@ -48,10 +52,8 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	// 方向制御
 	private ForgeDirection[] sendDir = {
-			ForgeDirection.NORTH,
-			ForgeDirection.EAST,
-			ForgeDirection.SOUTH,
-			ForgeDirection.WEST };
+			ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.SOUTH, ForgeDirection.WEST
+	};
 
 	// EU受け入れ用のチャンネル
 	protected IEUSinkChannelEMT EUChannel;
@@ -65,17 +67,17 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	public static int exchangeRateRF() {
 		// RF -> Charge
-		return AMTIntegration.RFrate;
+		return EnergyRate.rateRF;
 	}
 
 	public static int exchangeRateEU() {
 		// EU -> Charge
-		return AMTIntegration.EUrate;
+		return EnergyRate.rateEU;
 	}
 
 	public static int exchangeRateGF() {
 		// GF -> Charge
-		return AMTIntegration.GFrate;
+		return EnergyRate.rateGF;
 	}
 
 	@Override
@@ -429,8 +431,8 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 					if (this.itemstacks[1] == null
 							|| (this.itemstacks[1].getItem() == this.batteryContainerItem(target).getItem()
 									&& this.itemstacks[1].getItemDamage() == this.batteryContainerItem(target)
-											.getItemDamage() && this.itemstacks[1].stackSize < this.itemstacks[1]
-									.getMaxStackSize())) {
+											.getItemDamage()
+									&& this.itemstacks[1].stackSize < this.itemstacks[1].getMaxStackSize())) {
 						retItem = this.batteryContainerItem(target);
 
 						this.chargeAmount = i;
@@ -558,19 +560,19 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 			int ret = 0;
 			int inc = 16; // 速度はチャージバッテリーと同じ
 
+			if (Loader.isModLoaded("DCsAppleMilk") && ChargeItemManager.chargeItem.getChargeAmount(stack) > 0) {
+				return ChargeItemManager.chargeItem.getChargeAmount(stack);
+			} else if (stack.getItem() instanceof IBattery) {
+				// 充電池の場合、16/4tickずつ減少する。
+				IBattery bat = (IBattery) stack.getItem();
+				ret = bat.discharge(stack, 16, false);
+			}
+
 			if (ModAPIManager.INSTANCE.hasAPI("IC2API") && ret == 0) {
 				int i = EUItemHandlerEMT.dischargeAmount(stack, inc * exchangeRateEU(), true);
 				ret = Math.round(i / exchangeRateEU());
 			}
-			if (ret == 0) {
-				if (ChargeItemManager.chargeItem.getChargeAmount(stack) > 0) {
-					return ChargeItemManager.chargeItem.getChargeAmount(stack);
-				} else if (stack.getItem() instanceof IBattery) {
-					// 充電池の場合、16/4tickずつ減少する。
-					IBattery bat = (IBattery) stack.getItem();
-					ret = bat.discharge(stack, 16, false);
-				}
-			}
+
 			return ret;
 		}
 	}
@@ -608,17 +610,21 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 	/* ========== 以下、ISidedInventoryのメソッド ========== */
 
 	protected int[] slotsTop() {
-		return new int[] { 0 };
+		return new int[] {
+				0
+		};
 	}
 
 	protected int[] slotsBottom() {
-		return new int[] { 1 };
+		return new int[] {
+				1
+		};
 	}
 
 	protected int[] slotsSides() {
 		return new int[] {
-				0,
-				1 };
+				0, 1
+		};
 	}
 
 	public ItemStack[] itemstacks = new ItemStack[getSizeInventory()];
@@ -708,17 +714,15 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 	// par1EntityPlayerがTileEntityを使えるかどうか
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer
-				.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false
+				: par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory() {
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory() {
-	}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
@@ -781,13 +785,15 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 
 	/* IEnergyProvider */
 
-	@Optional.Method(modid = "CoFHAPI|energy")
+	@Optional.Method(
+			modid = "CoFHAPI|energy")
 	@Override
 	public boolean canConnectEnergy(ForgeDirection paramForgeDirection) {
 		return paramForgeDirection == this.getTileDir();
 	}
 
-	@Optional.Method(modid = "CoFHAPI|energy")
+	@Optional.Method(
+			modid = "CoFHAPI|energy")
 	@Override
 	public int extractEnergy(ForgeDirection paramForgeDirection, int paramInt, boolean paramBoolean) {
 		if (paramForgeDirection != this.getTileDir())
@@ -806,13 +812,15 @@ public class TileENMotor extends TileEntity implements ISidedInventory, IChargea
 		return 0;
 	}
 
-	@Optional.Method(modid = "CoFHAPI|energy")
+	@Optional.Method(
+			modid = "CoFHAPI|energy")
 	@Override
 	public int getEnergyStored(ForgeDirection paramForgeDirection) {
 		return this.chargeAmount * this.exchangeRateRF();
 	}
 
-	@Optional.Method(modid = "CoFHAPI|energy")
+	@Optional.Method(
+			modid = "CoFHAPI|energy")
 	@Override
 	public int getMaxEnergyStored(ForgeDirection paramForgeDirection) {
 		return this.getMaxChargeAmount() * this.exchangeRateRF();
