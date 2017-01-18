@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = "1.7.10_1.1"
+group= "defeatedcrow.addonforamt.EconomicalTea" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "EconomicalMilkTea"
+
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "eclipse"
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
+    compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24'
+}
+
+jar {
+    exclude '**/Thumbs.db'
+}
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "1.7.10_2.0", project.version
+    inputs.property "1.7.10", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+def defaultEncoding = 'UTF-8'
+compileJava {
+    options.encoding = defaultEncoding
+}
+
+[compileJava, compileTestJava,compileApiJava,recompMinecraft].each{
+    it.options.encoding = 'UTF-8'
+    it.options.compilerArgs += ['-source', '1.7', '-target', '1.7'] 
+}
+
+jar {
+    manifest {
+        attributes 'FMLCorePlugin' : 'mods.defeatedcrow.asm.AppleMilkCorePlugin','FMLCorePluginContainsFMLMod':'true'
+    }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+   classifier = 'dev'
+}

@@ -40,7 +40,7 @@ import net.minecraftforge.common.config.Property;
 @Mod(
 		modid = "DCsEcoMT",
 		name = "EconomicalMilkTea",
-		version = "1.7.10_1.1i",
+		version = "1.7.10_1.1j",
 		dependencies = "required-after:Forge@[10.13.4.1448,);required-after:mceconomy2@[2.5,);after:DCsAppleMilk@[1.7.10_2.9a,)")
 public class EcoMTCore {
 
