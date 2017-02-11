@@ -14,7 +14,14 @@ public class EUSourceManagerEMT {
 	}
 
 	public static IEUSourceChannelEMT getChannel(TileEntity tile, int cap, int tier) {
-		return new EUSourceChannelEMT(tile, cap, tier);
+		try {
+			return new EUSourceChannelEMT(tile, cap, tier);
+		} catch (NullPointerException e) {
+			return null; // Pass, EnergyNet probably not initialized 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static boolean isEULoaded() {
